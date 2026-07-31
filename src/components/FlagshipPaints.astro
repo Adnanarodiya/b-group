@@ -18,7 +18,8 @@ const initial = swatches[0];
       >
         <div class="wall__paint">
           <div class="wall__light"></div>
-          <div class="wall__frame"></div>
+          <div class="wall__door"><span></span></div>
+          <div class="wall__cornice"></div>
           <div class="grain"></div>
         </div>
         <div class="wall__skirting"></div>
@@ -125,21 +126,37 @@ const initial = swatches[0];
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(70% 60% at 78% 12%, rgb(255 255 255 / 0.32), transparent 60%),
-      linear-gradient(200deg, rgb(255 255 255 / 0.14), transparent 45%, rgb(0 0 0 / 0.22));
+      radial-gradient(70% 60% at 78% 12%, rgb(255 255 255 / 0.3), transparent 60%),
+      linear-gradient(200deg, rgb(255 255 255 / 0.12), transparent 45%, rgb(0 0 0 / 0.13));
   }
 
-  .wall__frame {
+  /* Abstract door panel so the colour reads as a painted interior surface. */
+  .wall__door {
     position: absolute;
-    right: 8%;
+    right: 9%;
     bottom: 0;
-    top: 16%;
-    width: 26%;
-    border-radius: 0.75rem 0.75rem 0 0;
-    background: linear-gradient(180deg, rgb(255 255 255 / 0.16), rgb(255 255 255 / 0.04));
-    border: 1px solid rgb(255 255 255 / 0.25);
-    border-bottom: none;
-    backdrop-filter: blur(2px);
+    top: 14%;
+    width: 27%;
+    border-radius: 0.5rem 0.5rem 0 0;
+    background: linear-gradient(190deg, #fbfaf7, #ece7de);
+    box-shadow:
+      0 0 0 0.55rem rgb(255 255 255 / 0.9),
+      -1.25rem 0 2.5rem -1rem rgb(0 0 0 / 0.28);
+  }
+
+  .wall__door span {
+    position: absolute;
+    inset: 12% 16%;
+    border: 1px solid rgb(0 0 0 / 0.07);
+    border-radius: 0.25rem;
+    background: linear-gradient(200deg, rgb(0 0 0 / 0.03), transparent 60%);
+  }
+
+  .wall__cornice {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4%;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.75), rgb(255 255 255 / 0.1));
   }
 
   .wall__skirting {

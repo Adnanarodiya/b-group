@@ -15,10 +15,10 @@ import { stats } from "../data/site";
       </p>
     </div>
 
-    <dl class="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+    <ul class="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
       {
         stats.map((stat, index) => (
-          <div
+          <li
             class="group relative border-t border-white/15 pt-6"
             data-reveal
             style={`--reveal-delay:${index * 90}ms`}
@@ -26,14 +26,14 @@ import { stats } from "../data/site";
             <span
               class="absolute -top-px left-0 h-px w-0 bg-signal-500 transition-[width] duration-700 ease-[var(--ease-brand)] group-hover:w-full"
             />
-            <dd class="font-display text-[clamp(2.75rem,5vw,3.75rem)] leading-none font-extrabold tracking-tight">
-              <span data-count-to={stat.value}>0</span>{stat.suffix}
-            </dd>
-            <dt class="mt-4 font-display text-base font-bold text-signal-500">{stat.label}</dt>
+            <p class="font-display text-[clamp(2.75rem,5vw,3.75rem)] leading-none font-extrabold tracking-tight">
+              <span data-count-to={stat.value}>{stat.value.toLocaleString("en-IN")}</span>{stat.suffix}
+            </p>
+            <p class="mt-4 font-display text-base font-bold text-signal-500">{stat.label}</p>
             <p class="mt-1.5 text-sm leading-relaxed text-white/60">{stat.detail}</p>
-          </div>
+          </li>
         ))
       }
-    </dl>
+    </ul>
   </div>
 </section>

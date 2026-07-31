@@ -2,8 +2,9 @@
 import Icon from "./Icon.astro";
 import { clients, verticals } from "../data/site";
 
-const fan = verticals.slice(0, 8);
-const marqueeClients = [...clients, ...clients];
+const fan = verticals.slice(0, 7);
+/** Duplicated exactly once so the CSS marquee loops seamlessly at -50%. */
+const heroClients = [...clients.slice(0, 6), ...clients.slice(0, 6)];
 ---
 
 <section class="relative isolate overflow-hidden bg-navy-950 text-white">
@@ -25,7 +26,8 @@ const marqueeClients = [...clients, ...clients];
 
   <div class="container-page relative flex min-h-[100svh] flex-col justify-center pt-36 pb-16 lg:pt-40">
     <div class="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
-      <div>
+      <!-- min-w-0 keeps the nowrap client ticker from widening the grid column. -->
+      <div class="min-w-0">
         <p class="eyebrow text-signal-500" data-reveal>Diversified Indian manufacturing group</p>
 
         <h1
@@ -37,8 +39,7 @@ const marqueeClients = [...clients, ...clients];
           <span class="relative inline-block">
             <span class="relative z-10">One standard</span>
             <span class="marker absolute -inset-x-1 bottom-1 z-0 h-[0.42em] bg-signal-500/85"></span>
-          </span>
-          of quality.
+          </span>{" "}of quality.
         </h1>
 
         <p
@@ -66,7 +67,7 @@ const marqueeClients = [...clients, ...clients];
           <div class="marquee mt-4 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
             <ul class="flex w-max animate-marquee items-center gap-8">
               {
-                marqueeClients.slice(0, 12).map((client) => (
+                heroClients.map((client) => (
                   <li class="font-display text-sm font-semibold whitespace-nowrap text-white/60">
                     {client}
                   </li>
@@ -77,9 +78,10 @@ const marqueeClients = [...clients, ...clients];
         </div>
       </div>
 
-      <!-- Paint-chip fan: one swatch per vertical, straightening on hover. -->
-      <div class="relative" data-reveal="scale" style="--reveal-delay:220ms">
-        <div class="fan mx-auto scale-[0.7] sm:scale-[0.85] lg:scale-100">
+      <!-- Paint-chip fan: one swatch per vertical, lifting on hover. -->
+      <div data-reveal="scale" style="--reveal-delay:220ms">
+        <div class="fan-wrap relative" aria-hidden="true">
+          <div class="fan">
           {
             fan.map((vertical, index) => (
               <article
@@ -92,13 +94,14 @@ const marqueeClients = [...clients, ...clients];
               </article>
             ))
           }
+          </div>
         </div>
 
         <div
-          class="absolute -bottom-2 left-1/2 w-[min(20rem,90%)] -translate-x-1/2 rounded-2xl border border-white/15 bg-white/8 p-5 backdrop-blur-md"
+          class="mt-1 w-[min(19rem,100%)] rounded-2xl border border-white/15 bg-white/8 p-5 backdrop-blur-md"
         >
           <p class="font-display text-4xl font-extrabold text-signal-500">
-            <span data-count-to="10">0</span>
+            <span data-count-to="10">10</span>
           </p>
           <p class="mt-1 text-sm leading-snug text-white/70">
             verticals sourced through one accountable relationship — not ten vendor contracts.
@@ -136,42 +139,69 @@ const marqueeClients = [...clients, ...clients];
     overflow: hidden;
   }
 
+  .fan-wrap {
+    --chip-w: 9rem;
+    height: 15.5rem;
+  }
+
   .fan {
-    position: relative;
-    height: 26rem;
-    width: 100%;
-    max-width: 30rem;
+    position: absolute;
+    inset: 0;
+    /* Chips swing around a pivot well below the deck, so the fan opens wide. */
+    --pivot: 16rem;
+    --spread: 8deg;
   }
 
   .chip {
     position: absolute;
-    bottom: 4.5rem;
     left: 50%;
-    width: 8.5rem;
+    width: var(--chip-w);
     padding: 0.75rem 0.75rem 1rem;
     border-radius: 1rem;
-    background: rgb(255 255 255 / 0.96);
+    background: rgb(255 255 255 / 0.97);
     color: var(--color-navy-900);
     box-shadow: 0 20px 45px -20px rgb(4 11 33 / 0.85);
-    transform-origin: bottom center;
-    transform: translateX(-50%) rotate(calc(var(--offset) * 9deg))
-      translateY(calc(var(--offset) * var(--offset) * 0.55rem));
-    transition: transform 0.6s var(--ease-brand), box-shadow 0.6s var(--ease-brand);
-    animation: chip-in 0.8s var(--ease-brand) backwards;
-    animation-delay: calc(280ms + var(--i) * 70ms);
+    bottom: 2.5rem;
+    transform-origin: 50% calc(100% + var(--pivot));
+    transform: translateX(-50%) rotate(calc(var(--offset) * var(--spread)));
+    transition:
+      transform 0.6s var(--ease-brand),
+      box-shadow 0.6s var(--ease-brand);
+    animation: chip-in 0.9s var(--ease-brand) backwards;
+    animation-delay: calc(280ms + var(--i) * 80ms);
+    z-index: calc(10 - var(--i));
   }
 
-  .chip:hover {
-    transform: translateX(-50%) rotate(calc(var(--offset) * 9deg))
-      translateY(calc(var(--offset) * var(--offset) * 0.55rem - 2.25rem)) scale(1.04);
-    box-shadow: 0 30px 60px -22px rgb(4 11 33 / 0.95);
+  .chip:hover,
+  .chip:focus-within {
+    transform: translateX(-50%) rotate(calc(var(--offset) * var(--spread)))
+      translateY(-2.25rem) scale(1.03);
+    box-shadow: 0 34px 60px -22px rgb(4 11 33 / 0.95);
     z-index: 20;
   }
 
   @keyframes chip-in {
     from {
       opacity: 0;
-      transform: translateX(-50%) rotate(0deg) translateY(3rem);
+      transform: translateX(-50%) rotate(0deg) translateY(3.5rem);
+    }
+  }
+
+  @media (width < 40rem) {
+    .fan-wrap {
+      --chip-w: 7rem;
+      height: 13rem;
+    }
+    .fan {
+      --pivot: 12rem;
+      --spread: 7deg;
+    }
+    .chip {
+      bottom: 2rem;
+      padding: 0.6rem 0.6rem 0.8rem;
+    }
+    .chip__swatch {
+      height: 3.5rem;
     }
   }
 
@@ -182,8 +212,23 @@ const marqueeClients = [...clients, ...clients];
     background: linear-gradient(160deg, var(--accent), color-mix(in oklab, var(--accent) 62%, black));
   }
 
-  .chip__label {
+  /* Cards overlap like a real shade fan, so the name only shows on the card
+     that has been lifted to the front. */
+  .chip__label,
+  .chip__code {
     display: block;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-brand);
+  }
+
+  .chip:hover .chip__label,
+  .chip:hover .chip__code,
+  .chip:focus-within .chip__label,
+  .chip:focus-within .chip__code {
+    opacity: 1;
+  }
+
+  .chip__label {
     margin-top: 0.625rem;
     font-family: var(--font-display);
     font-size: 0.8125rem;
@@ -192,7 +237,6 @@ const marqueeClients = [...clients, ...clients];
   }
 
   .chip__code {
-    display: block;
     margin-top: 0.125rem;
     font-size: 0.6875rem;
     font-weight: 500;

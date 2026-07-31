@@ -445,6 +445,10 @@ const panelId = (label: string) => `panel-${label.toLowerCase().replace(/[^a-z]+
     };
     const cancelClose = () => window.clearTimeout(closeTimer);
 
+    // Set while returning focus to a trigger after Escape, so the panel we just
+    // dismissed does not immediately reopen.
+    let suppressFocusOpen = 0;
+
     triggers.forEach((trigger) => {
       const id = trigger.dataset.trigger!;
       trigger.addEventListener("click", () => setPanel(openId === id ? null : id));
@@ -453,6 +457,7 @@ const panelId = (label: string) => `panel-${label.toLowerCase().replace(/[^a-z]+
         setPanel(id);
       });
       trigger.addEventListener("focus", () => {
+        if (Date.now() < suppressFocusOpen) return;
         cancelClose();
         setPanel(id);
       });
@@ -474,8 +479,63 @@ const panelId = (label: string) => `panel-${label.toLowerCase().replace(/[^a-z]+
       if (event.key === "Escape" && openId) {
         const active = triggers.find((t) => t.dataset.trigger === openId);
         setPanel(null);
+        suppressFocusOpen = Date.now() + 400;
         active?.focus();
       }
+    });
+
+    // Keyboard route into and out of an open panel: the panels sit after the bar
+    // in the DOM, so focus has to be moved explicitly.
+    const barFocusables = () =>
+      Array.from(header.querySelectorAll<HTMLElement>("a[href], button")).filter(
+        (el) => !el.closest("[data-panel]"),
+      );
+    const panelFocusables = (id: string) =>
+      Array.from(document.getElementById(id)?.querySelectorAll<HTMLElement>("a[href], button") ?? []);
+
+    triggers.forEach((trigger) => {
+      const id = trigger.dataset.trigger!;
+      trigger.addEventListener("keydown", (event) => {
+        const entering = event.key === "ArrowDown" || (event.key === "Tab" && !event.shiftKey);
+        if (!entering) return;
+        const [first] = panelFocusables(id);
+        if (!first) return;
+        event.preventDefault();
+        setPanel(id);
+        requestAnimationFrame(() => first.focus());
+      });
+    });
+
+    panels.forEach((panel) => {
+      panel.addEventListener("keydown", (event) => {
+        if (event.key !== "Tab") return;
+        const items = panelFocusables(panel.id);
+        const trigger = triggers.find((t) => t.dataset.trigger === panel.id);
+        const active = document.activeElement;
+
+        if (!event.shiftKey && active === items.at(-1)) {
+          event.preventDefault();
+          setPanel(null);
+          const bar = barFocusables();
+          const next = bar[bar.indexOf(trigger as HTMLElement) + 1];
+          next?.focus();
+        } else if (event.shiftKey && active === items[0]) {
+          event.preventDefault();
+          setPanel(null);
+          suppressFocusOpen = Date.now() + 400;
+          trigger?.focus();
+        }
+      });
+    });
+
+    // Tabbing on to anything outside the open panel (a sibling nav link, the CTA,
+    // the page itself) closes it.
+    header.addEventListener("focusin", (event) => {
+      if (!openId) return;
+      const target = event.target as HTMLElement;
+      const isOwnTrigger = target.dataset?.trigger === openId;
+      const isInsidePanel = document.getElementById(openId)?.contains(target);
+      if (!isOwnTrigger && !isInsidePanel) setPanel(null);
     });
     header.addEventListener("focusout", (event) => {
       if (!header.contains(event.relatedTarget as Node)) setPanel(null);
