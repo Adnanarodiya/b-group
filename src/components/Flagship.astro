@@ -1,101 +1,118 @@
 ---
+const slides = [
+  {
+    title: "Bi Paints & Color Coating",
+    tags: ["Flagship", "Industrial Coatings"],
+    glow: "#ffc107",
+    image:
+      "https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Bi Engineering",
+    tags: ["Infrastructure", "Projects"],
+    glow: "#3d6fd4",
+    image:
+      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Bi Modular Kitchen",
+    tags: ["Homes", "Interiors"],
+    glow: "#ffc107",
+    image:
+      "https://images.unsplash.com/photo-1556912173-46c336c7fd55?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Bi E-commerce",
+    tags: ["Digital", "Retail"],
+    glow: "#3d6fd4",
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80",
+  },
+];
 ---
 
-<section class="flagship section" id="flagship">
-  <div class="flagship-shell">
-    <div class="flagship-media" aria-hidden="true">
-      <img
-        src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?auto=format&fit=crop&w=1600&q=80"
-        alt=""
-        width="1600"
-        height="1100"
-        loading="lazy"
-      />
+<section class="section" id="flagship">
+  <div class="container">
+    <div class="flex justify-between flex-col md:flex-row items-center mb-10 md:mb-8 gap-6">
+      <div class="reveal">
+        <h2 class="text-center gradient-text text-[clamp(2rem,4vw,3.2rem)] md:text-left">
+          Flagship
+          <br />
+          <em>Spotlight</em>
+        </h2>
+      </div>
+      <div class="flex justify-center gap-3">
+        <button
+          class="work-prev size-12 rounded-full bg-light card-shadow flex items-center justify-center text-xl"
+          aria-label="Previous"
+          type="button">←</button
+        >
+        <button
+          class="work-next size-12 rounded-full bg-light card-shadow flex items-center justify-center text-xl"
+          aria-label="Next"
+          type="button">→</button
+        >
+      </div>
     </div>
-    <div class="flagship-content reveal">
-      <p class="section-label">Flagship Spotlight</p>
-      <h2 class="section-title">Bi Paints — protecting what India builds</h2>
-      <p class="section-lead">
-        High-performance industrial and protective coatings for infrastructure,
-        marine, energy, and demanding industrial environments.
-      </p>
-      <ul>
-        <li>Protective &amp; industrial coating systems</li>
-        <li>Marine, container, and heavy-duty applications</li>
-        <li>Color coating expertise for lasting finishes</li>
-        <li>Backed by a major manufacturing expansion roadmap</li>
-      </ul>
-      <a class="btn btn-primary" href="#contact">Request a consultation</a>
+  </div>
+
+  <div class="reveal swiper work-swiper px-4 md:px-0">
+    <div class="swiper-wrapper">
+      {
+        slides.map((slide) => (
+          <div class="swiper-slide">
+            <article class="p-4 pt-7 bg-light rounded-3xl flex flex-col gap-6 relative overflow-hidden">
+              <div
+                class="rounded-full blur-[100px] opacity-70 size-56 -top-12 -right-14 absolute z-0"
+                style={`background-color:${slide.glow}`}
+              />
+              <div class="flex flex-col gap-4 relative z-10 pl-4">
+                <h3 class="font-normal text-2xl">{slide.title}</h3>
+                <ul class="flex flex-wrap gap-2">
+                  {slide.tags.map((tag) => (
+                    <li class="bg-gradient-to-b from-light to-[#eef3ff] badge-shadow inline-block rounded-full py-1.5 px-3.5 text-sm font-medium">
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="relative z-10 overflow-hidden rounded-2xl">
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  width="1000"
+                  height="700"
+                  loading="lazy"
+                  class="w-full h-72 md:h-96 rounded-2xl object-cover transition-transform duration-700 hover:scale-110 hover:-rotate-3"
+                />
+              </div>
+            </article>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
 
-<style>
-  .flagship {
-    padding: 0;
-    background: var(--mist);
-  }
+<script>
+  import Swiper from "swiper";
+  import { Navigation, Autoplay } from "swiper/modules";
 
-  .flagship-shell {
-    display: grid;
-    min-height: min(78vh, 740px);
-  }
-
-  .flagship-media {
-    min-height: 280px;
-    overflow: hidden;
-  }
-
-  .flagship-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .flagship-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: clamp(2.5rem, 6vw, 4.5rem);
-    background:
-      linear-gradient(160deg, #ffffff 0%, #eef3fb 100%);
-  }
-
-  .flagship-content .section-title {
-    max-width: 14ch;
-  }
-
-  ul {
-    margin: 1.5rem 0 2rem;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 0.7rem;
-  }
-
-  li {
-    position: relative;
-    padding-left: 1.2rem;
-    color: var(--ink-soft);
-  }
-
-  li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.55rem;
-    width: 0.45rem;
-    height: 0.45rem;
-    background: var(--gold);
-  }
-
-  @media (min-width: 920px) {
-    .flagship-shell {
-      grid-template-columns: 1.15fr 1fr;
-    }
-
-    .flagship-media {
-      min-height: 100%;
-    }
-  }
-</style>
+  new Swiper(".work-swiper", {
+    modules: [Navigation, Autoplay],
+    loop: true,
+    autoplay: { delay: 8000, disableOnInteraction: false },
+    speed: 900,
+    spaceBetween: 24,
+    centeredSlides: true,
+    slidesPerView: 1,
+    navigation: {
+      nextEl: ".work-next",
+      prevEl: ".work-prev",
+    },
+    breakpoints: {
+      768: { slidesPerView: 1.2 },
+      1262: { slidesPerView: 2.2 },
+    },
+  });
+</script>

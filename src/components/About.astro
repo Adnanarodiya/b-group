@@ -1,89 +1,89 @@
 ---
+const cards = [
+  {
+    title: "One Group.",
+    em: "Many Engines",
+    text: "BiGROUP brings industrial coatings excellence together with consumer-facing businesses across India.",
+    points: [
+      "Diversified vertical portfolio",
+      "Industrial + consumer reach",
+      "Long-term partnership mindset",
+    ],
+    reverse: false,
+  },
+  {
+    title: "Quality Without",
+    em: "Compromise",
+    text: "Performance-first products and processes designed for demanding Indian operating conditions.",
+    points: [],
+    reverse: true,
+  },
+  {
+    title: "Trusted By",
+    em: "Industry",
+    text: "From defence and steel to engineering majors — organisations that demand reliability choose BiGROUP.",
+    points: [
+      "Enterprise project delivery",
+      "Protective coating expertise",
+      "Nationwide growth platform",
+    ],
+    reverse: false,
+  },
+];
 ---
 
-<section class="about section" id="about">
-  <div class="container about-grid">
-    <div class="about-copy reveal">
-      <p class="section-label">About Bi Group</p>
-      <h2 class="section-title">One group. Many engines of growth.</h2>
-      <p class="section-lead">
-        BiGROUP brings together industrial coatings excellence and consumer-facing
-        businesses — delivering performance where it matters and everyday value
-        where people live.
-      </p>
-      <p class="about-body">
-        From protective coatings trusted by infrastructure leaders to modular
-        kitchens, agriculture, electronics, and e-commerce, we operate with a
-        shared commitment to quality, reliability, and long-term partnership.
-      </p>
-      <a class="btn btn-outline" href="#why">Why partners choose us</a>
+<section class="section" id="about">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="text-center gradient-text text-[clamp(2rem,4vw,3.2rem)] mb-10">
+        About Bi
+        <br />
+        <em>Group</em>
+      </h2>
     </div>
 
-    <div class="about-visual reveal reveal-delay-2" aria-hidden="true">
-      <div class="about-frame">
-        <img
-          src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80"
-          alt=""
-          width="1200"
-          height="900"
-          loading="lazy"
-        />
-      </div>
-      <div class="about-accent"></div>
+    <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
+      {
+        cards.map((card, i) => (
+          <div class={`reveal bg-light px-8 py-8 rounded-2xl flex flex-col gap-y-12 h-full card-shadow`}>
+            <div class={`flex flex-col gap-y-5 ${card.reverse ? "order-2" : ""}`}>
+              <h3 class="gradient-text text-[clamp(1.5rem,2.5vw,2rem)]">
+                {card.title}
+                <br />
+                <em>{card.em}</em>
+              </h3>
+              <p class="text-xl text-text-dark/90">{card.text}</p>
+              {card.points.length > 0 && (
+                <ul class="flex flex-col gap-y-3">
+                  {card.points.map((point) => (
+                    <li class="flex items-start gap-x-2">
+                      <img
+                        src="/images/icons/check.svg"
+                        alt=""
+                        width="16"
+                        height="16"
+                        class="w-4 h-4 shrink-0 mt-1"
+                      />
+                      <span class="font-semibold">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div class={`${card.reverse ? "order-1 mb-auto" : "mt-auto"}`}>
+              <div
+                class={`h-28 rounded-2xl ${
+                  i === 0
+                    ? "bg-gradient-to-br from-primary/20 to-secondary/30"
+                    : i === 1
+                      ? "bg-gradient-to-br from-tertiary/25 to-primary/15"
+                      : "bg-gradient-to-br from-secondary/40 to-primary/20"
+                }`}
+              />
+            </div>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
-
-<style>
-  .about {
-    background:
-      radial-gradient(circle at 90% 10%, rgba(255, 193, 7, 0.12), transparent 28%),
-      linear-gradient(180deg, #ffffff 0%, var(--mist) 100%);
-  }
-
-  .about-grid {
-    display: grid;
-    gap: 2.75rem;
-    align-items: center;
-  }
-
-  .about-body {
-    margin: 1.25rem 0 2rem;
-    color: var(--ink-soft);
-    max-width: 48ch;
-  }
-
-  .about-visual {
-    position: relative;
-  }
-
-  .about-frame {
-    position: relative;
-    overflow: hidden;
-    border-radius: 2px;
-    aspect-ratio: 5 / 4;
-  }
-
-  .about-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .about-accent {
-    position: absolute;
-    right: -0.75rem;
-    bottom: -0.75rem;
-    width: 42%;
-    height: 42%;
-    border: 3px solid var(--gold);
-    z-index: -1;
-  }
-
-  @media (min-width: 900px) {
-    .about-grid {
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 4rem;
-    }
-  }
-</style>

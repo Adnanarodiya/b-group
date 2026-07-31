@@ -1,0 +1,33 @@
+---
+import IconButton from "./IconButton.astro";
+---
+
+<section class="section">
+  <div class="container">
+    <div
+      class="py-20 md:py-28 px-6 bg-light rounded-[2rem] md:rounded-[3rem] relative overflow-hidden"
+    >
+      <div
+        class="absolute top-1/2 -right-24 -translate-y-1/2 size-60 md:size-80 bg-secondary rounded-full blur-[70px] opacity-70"
+      >
+      </div>
+      <div
+        class="absolute top-1/2 -left-24 -translate-y-1/2 size-60 md:size-80 bg-tertiary rounded-full blur-[70px] opacity-50"
+      >
+      </div>
+
+      <div class="reveal flex flex-col justify-center items-center text-center gap-6 relative z-10">
+        <h2 class="gradient-text text-[clamp(2rem,4vw,3.2rem)]">
+          Protecting What
+          <br />
+          <em>India</em> Builds
+        </h2>
+        <p class="font-light text-lg text-text-dark max-w-md">
+          From industrial coatings to everyday verticals — BiGROUP turns capability into clear
+          results.
+        </p>
+        <IconButton href="#contact" label="Talk to BiGROUP" />
+      </div>
+    </div>
+  </div>
+</section>

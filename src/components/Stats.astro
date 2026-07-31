@@ -2,65 +2,24 @@
 const stats = [
   { value: "10+", label: "Business verticals" },
   { value: "11+", label: "Enterprise clients highlighted" },
-  { value: "₹500 Cr", label: "Strategic paints investment announced" },
-  { value: "Pan-India", label: "Reach across industry & homes" },
+  { value: "₹500 Cr", label: "Paints investment announced" },
+  { value: "Pan-India", label: "Ambition across industries" },
 ];
 ---
 
-<section class="stats" aria-label="Bi Group at a glance">
-  <div class="container stats-strip">
-    {
-      stats.map((stat, index) => (
-        <article class={`stat reveal reveal-delay-${(index % 3) + 1}`}>
-          <p class="value">{stat.value}</p>
-          <p class="label">{stat.label}</p>
-        </article>
-      ))
-    }
+<section class="section pt-8" aria-label="At a glance">
+  <div class="container">
+    <div class="reveal grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {
+        stats.map((stat) => (
+          <article class="bg-light rounded-3xl p-7 card-shadow">
+            <p class="text-3xl md:text-4xl font-semibold text-primary tracking-tight">
+              {stat.value}
+            </p>
+            <p class="mt-2 text-text-dark">{stat.label}</p>
+          </article>
+        ))
+      }
+    </div>
   </div>
 </section>
-
-<style>
-  .stats {
-    background:
-      linear-gradient(135deg, var(--blue-deep), var(--blue) 55%, var(--blue-mid));
-    color: var(--white);
-    padding: 2.75rem 0;
-  }
-
-  .stats-strip {
-    display: grid;
-    gap: 1.75rem;
-  }
-
-  .stat {
-    border-left: 3px solid var(--gold);
-    padding-left: 1rem;
-  }
-
-  .value {
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-  }
-
-  .label {
-    margin-top: 0.25rem;
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 0.95rem;
-  }
-
-  @media (min-width: 700px) {
-    .stats-strip {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem 2.5rem;
-    }
-  }
-
-  @media (min-width: 1000px) {
-    .stats-strip {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-</style>

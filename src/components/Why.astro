@@ -1,0 +1,40 @@
+---
+const reasons = [
+  {
+    title: "Industrial Credibility",
+    text: "Coatings and engineering DNA trusted by defence, steel, and infrastructure leaders.",
+  },
+  {
+    title: "Diversified Strength",
+    text: "A multi-vertical model connecting factories, projects, homes, and digital commerce.",
+  },
+  {
+    title: "Partnership Mindset",
+    text: "Long-term relationships built on responsiveness, clarity, and measurable delivery.",
+  },
+];
+---
+
+<section class="section" id="why">
+  <div class="container">
+    <div class="reveal mb-10">
+      <h2 class="text-center gradient-text text-[clamp(2rem,4vw,3.2rem)]">
+        Why Choose
+        <br />
+        <em>BiGROUP</em>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {
+        reasons.map((reason) => (
+          <article class="reveal bg-light rounded-3xl p-8 card-shadow">
+            <div class="size-3 bg-secondary mb-6"></div>
+            <h3 class="text-2xl mb-3">{reason.title}</h3>
+            <p class="text-text-dark text-lg">{reason.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

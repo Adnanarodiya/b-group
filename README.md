@@ -1,18 +1,12 @@
 # BiGROUP Landing Page
 
-Modern marketing site for **BiGROUP**, built with [Astro](https://astro.build).
+Astro + Tailwind recreation of the [Hyperbit Astro](https://themefisher.com/products/hyperbit-astro) home layout, customized for **BiGROUP**.
 
-## Sections
+## Stack
 
-- Hero
-- About Bi Group
-- Business Verticals
-- At a Glance / Stats
-- Flagship Spotlight — Bi Paints
-- Trusted By / Client Logos
-- Why Bi Group
-- Call-to-Action
-- Footer / Contact
+- Astro 7
+- Tailwind CSS v4
+- Swiper (flagship + trusted-by carousels)
 
 ## Develop
 

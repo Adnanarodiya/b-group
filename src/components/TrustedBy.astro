@@ -14,157 +14,73 @@ const clients = [
 ];
 ---
 
-<section class="trusted section" id="trusted" aria-labelledby="trusted-title">
-  <div class="container">
-    <div class="intro reveal">
-      <p class="section-label">Trusted By</p>
-      <h2 class="section-title" id="trusted-title">Partners who build at scale</h2>
-      <p class="section-lead">
-        From defence and steel to engineering majors — organisations that demand
-        reliability choose BiGROUP.
-      </p>
-    </div>
-
-    <div class="logo-marquee" aria-label="Client logos">
-      <div class="marquee-track">
-        {
-          clients.map((client) => (
-            <div class="logo-chip">
-              <span>{client}</span>
-            </div>
-          ))
-        }
-        {
-          clients.map((client) => (
-            <div class="logo-chip" aria-hidden="true">
-              <span>{client}</span>
-            </div>
-          ))
-        }
+<section class="section" id="trusted">
+  <div class="container mb-8">
+    <div class="flex justify-between flex-col md:flex-row items-center gap-6">
+      <div class="reveal">
+        <h2 class="text-center gradient-text text-[clamp(2rem,4vw,3.2rem)] md:text-left">
+          Trusted By
+          <br />
+          Partners Who <em>Build</em>
+        </h2>
+      </div>
+      <div class="flex justify-center gap-3">
+        <button
+          class="trust-prev size-12 rounded-full bg-light card-shadow flex items-center justify-center text-xl"
+          aria-label="Previous"
+          type="button">←</button
+        >
+        <button
+          class="trust-next size-12 rounded-full bg-light card-shadow flex items-center justify-center text-xl"
+          aria-label="Next"
+          type="button">→</button
+        >
       </div>
     </div>
+  </div>
 
-    <ul class="client-grid reveal">
+  <div class="reveal swiper trust-swiper px-4">
+    <div class="swiper-wrapper">
       {
         clients.map((client) => (
-          <li>
-            <span>{client}</span>
-          </li>
+          <div class="swiper-slide">
+            <div class="px-8 pt-10 pb-12 bg-light rounded-[28px] h-full relative overflow-hidden card-shadow min-h-56 flex flex-col justify-between">
+              <div class="size-16 rounded-2xl bg-primary/10 text-primary font-semibold flex items-center justify-center text-xl">
+                Bi
+              </div>
+              <div>
+                <h3 class="text-2xl font-medium mb-2">{client}</h3>
+                <p class="text-text-dark">
+                  Enterprise partner highlighted in BiGROUP’s trusted network.
+                </p>
+              </div>
+            </div>
+          </div>
         ))
       }
-    </ul>
+    </div>
   </div>
 </section>
 
-<style>
-  .trusted {
-    background: var(--white);
-    overflow: hidden;
-  }
+<script>
+  import Swiper from "swiper";
+  import { Navigation, Autoplay } from "swiper/modules";
 
-  .intro {
-    margin-bottom: 2rem;
-  }
-
-  .logo-marquee {
-    position: relative;
-    mask-image: linear-gradient(
-      90deg,
-      transparent,
-      #000 8%,
-      #000 92%,
-      transparent
-    );
-    margin-bottom: 2rem;
-  }
-
-  .marquee-track {
-    display: flex;
-    gap: 1rem;
-    width: max-content;
-    animation: marquee 38s linear infinite;
-  }
-
-  .logo-chip {
-    flex: 0 0 auto;
-    min-width: 180px;
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--line);
-    background: var(--mist);
-    text-align: center;
-  }
-
-  .logo-chip span {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--blue);
-    letter-spacing: -0.01em;
-  }
-
-  .client-grid {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-  }
-
-  .client-grid li {
-    min-height: 4.25rem;
-    display: grid;
-    place-items: center;
-    text-align: center;
-    padding: 0.85rem;
-    border-bottom: 2px solid transparent;
-    background: linear-gradient(180deg, #f8fafd, #eef3fb);
-    transition:
-      border-color 0.35s var(--ease),
-      transform 0.35s var(--ease);
-  }
-
-  .client-grid li:hover {
-    border-bottom-color: var(--gold);
-    transform: translateY(-2px);
-  }
-
-  .client-grid span {
-    font-weight: 700;
-    color: var(--blue-deep);
-    font-size: 0.92rem;
-  }
-
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  @media (min-width: 800px) {
-    .client-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .logo-marquee {
-      display: none;
-    }
-  }
-
-  @media (max-width: 799px) {
-    .client-grid {
-      display: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-track {
-      animation: none;
-      flex-wrap: wrap;
-      width: 100%;
-    }
-  }
-</style>
+  new Swiper(".trust-swiper", {
+    modules: [Navigation, Autoplay],
+    loop: true,
+    autoplay: { delay: 7000, disableOnInteraction: false },
+    speed: 900,
+    spaceBetween: 24,
+    centeredSlides: true,
+    slidesPerView: 1,
+    navigation: {
+      nextEl: ".trust-next",
+      prevEl: ".trust-prev",
+    },
+    breakpoints: {
+      768: { slidesPerView: 1.2 },
+      1262: { slidesPerView: 2.2 },
+    },
+  });
+</script>

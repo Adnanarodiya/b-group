@@ -1,152 +1,193 @@
 ---
-const verticals = [
+import IconButton from "./IconButton.astro";
+
+const steps = [
   {
-    name: "Bi Paints & Color Coating",
-    blurb: "Industrial, protective, marine, and decorative coating systems.",
+    name: "Explore",
+    em: "Verticals",
+    title: "Our Business",
+    titleEm: "Verticals",
+    content:
+      "Ten complementary businesses — anchored by coatings expertise and extended into homes, industry, and commerce.",
+    points: [
+      "Bi Paints & Color Coating",
+      "Bi Modular Kitchen",
+      "Bi Agriculture",
+      "Bi Homeopathy",
+    ],
+    highlight: {
+      title: "Industrial",
+      em: "Core",
+      text: "High-performance coatings and engineering capabilities trusted by enterprise clients.",
+      items: ["Bi Paints", "Bi Painting Solutions", "Bi Engineering"],
+    },
   },
   {
-    name: "Bi Modular Kitchen",
-    blurb: "Designed storage and finishes for modern Indian homes.",
+    name: "Home &",
+    em: "Lifestyle",
+    title: "Everyday",
+    titleEm: "Solutions",
+    content:
+      "Consumer-facing verticals designed for modern Indian homes and daily needs.",
+    points: ["Bi Clothes", "Bi Electronics", "Bi Air Conditioner", "Bi Modular Kitchen"],
+    highlight: {
+      title: "Built for",
+      em: "Homes",
+      text: "From kitchens to cooling — products that bring BiGROUP quality into everyday life.",
+      items: ["Modular Kitchen", "Electronics", "Air Conditioner"],
+    },
   },
   {
-    name: "Bi Agriculture",
-    blurb: "Solutions that support productivity across the farming value chain.",
-  },
-  {
-    name: "Bi Homeopathy",
-    blurb: "Trusted wellness products rooted in careful formulation.",
-  },
-  {
-    name: "Bi Clothes",
-    blurb: "Apparel crafted for everyday comfort and lasting wear.",
-  },
-  {
-    name: "Bi Electronics",
-    blurb: "Consumer electronics built around reliability and value.",
-  },
-  {
-    name: "Bi Air Conditioner",
-    blurb: "Cooling solutions engineered for Indian climates.",
-  },
-  {
-    name: "Bi Painting Solutions",
-    blurb: "End-to-end application support for projects large and small.",
-  },
-  {
-    name: "Bi Engineering",
-    blurb: "Technical capability for industrial and infrastructure needs.",
-  },
-  {
-    name: "Bi E-commerce",
-    blurb: "Digital storefronts connecting Bi brands to customers nationwide.",
+    name: "Grow &",
+    em: "Connect",
+    title: "Commerce &",
+    titleEm: "Reach",
+    content:
+      "Digital and distribution platforms that connect Bi brands with customers nationwide.",
+    points: ["Bi E-commerce", "Pan-India ambition", "Partner-ready model"],
+    highlight: {
+      title: "Digital",
+      em: "Storefront",
+      text: "E-commerce and channel partnerships that scale BiGROUP across markets.",
+      items: ["Bi E-commerce", "Retail partners", "Direct enquiry"],
+    },
   },
 ];
 ---
 
-<section class="businesses section" id="businesses">
+<section class="section bg-gradient-to-b from-[#eef3ff] to-body rounded-[60px] relative overflow-hidden" id="businesses">
   <div class="container">
-    <div class="intro reveal">
-      <p class="section-label">Our Business Verticals</p>
-      <h2 class="section-title">A portfolio built for India’s next decade</h2>
-      <p class="section-lead">
-        Ten complementary verticals — anchored by coatings expertise and extended
-        into homes, industry, and commerce.
+    <div class="reveal">
+      <h2 class="text-center gradient-text text-[clamp(2rem,4vw,3.2rem)] mb-4">
+        Get to Know
+        <br />
+        Bi <em>Easily</em>
+      </h2>
+      <p class="text-center text-lg text-text-dark">
+        A diversified portfolio built for India’s next decade
       </p>
     </div>
 
-    <ul class="vertical-list">
+    <div class="mt-14" data-steps>
+      <ul class="grid xl:grid-cols-3 gap-4 mb-8">
+        {
+          steps.map((step, index) => (
+            <li>
+              <button
+                type="button"
+                data-step-tab={index}
+                class:list={[
+                  "step-tab w-full flex items-center gap-4 p-2.5 pr-7 border rounded-full transition duration-300 cursor-pointer text-left",
+                  index === 0
+                    ? "is-active border-transparent bg-[image:var(--background-image-gradient-secondary)]"
+                    : "bg-light border-dark/10",
+                ]}
+              >
+                <span
+                  class:list={[
+                    "step-num text-2xl font-secondary italic font-light shrink-0 rounded-full size-14 flex items-center justify-center",
+                    index === 0
+                      ? "bg-[image:var(--background-image-gradient-light)] text-text-dark"
+                      : "bg-[image:var(--background-image-gradient-dark)] text-light",
+                  ]}
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span
+                  class:list={[
+                    "step-label text-lg sm:text-2xl has-em transition duration-300",
+                    index === 0 ? "text-light" : "text-text-dark",
+                  ]}
+                >
+                  {step.name} <em>{step.em}</em>
+                </span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+
       {
-        verticals.map((item, index) => (
-          <li class={`vertical-item reveal reveal-delay-${(index % 3) + 1}`}>
-            <span class="index">{String(index + 1).padStart(2, "0")}</span>
-            <div>
-              <h3>{item.name}</h3>
-              <p>{item.blurb}</p>
+        steps.map((step, index) => (
+          <div
+            data-step-panel={index}
+            class:list={[
+              "bg-light rounded-[2rem] grid lg:grid-cols-2 overflow-hidden",
+              index === 0 ? "" : "hidden",
+            ]}
+          >
+            <div class="p-6 sm:p-10 xl:p-16">
+              <h2 class="gradient-text mb-6 text-[clamp(1.8rem,3vw,2.6rem)]">
+                {step.title} <em>{step.titleEm}</em>
+              </h2>
+              <p class="text-lg text-text-dark mb-10">{step.content}</p>
+              <ul class="flex flex-col gap-y-4 mb-8">
+                {step.points.map((point) => (
+                  <li class="flex items-start gap-2">
+                    <img
+                      src="/images/icons/check.svg"
+                      alt=""
+                      width="16"
+                      height="16"
+                      class="size-4 shrink-0 mt-1"
+                    />
+                    <p class="font-semibold">{point}</p>
+                  </li>
+                ))}
+              </ul>
+              <IconButton href="#contact" label="Enquire Now" />
             </div>
-            <span class="arrow" aria-hidden="true">→</span>
-          </li>
+            <div class="lg:pt-10 sm:px-8 lg:pr-8 overflow-hidden pb-8">
+              <div class="bg-[image:var(--background-image-gradient-secondary)] sm:rounded-[2rem] p-6 h-full">
+                <h3 class="text-2xl text-light has-em mb-4">
+                  {step.highlight.title} <em class="text-secondary">{step.highlight.em}</em>
+                </h3>
+                <p class="text-light/90 font-light text-lg mb-8">{step.highlight.text}</p>
+                <div class="grid gap-4">
+                  {step.highlight.items.map((item) => (
+                    <div class="rounded-2xl bg-light p-5 card-shadow">
+                      <p class="font-semibold text-text-dark text-lg">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         ))
       }
-    </ul>
+    </div>
   </div>
 </section>
 
-<style>
-  .businesses {
-    background: var(--white);
-  }
+<script>
+  const root = document.querySelector("[data-steps]");
+  if (root) {
+    const tabs = root.querySelectorAll("[data-step-tab]");
+    const panels = root.querySelectorAll("[data-step-panel]");
 
-  .intro {
-    margin-bottom: 2.5rem;
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const index = tab.getAttribute("data-step-tab");
+        tabs.forEach((t, i) => {
+          const active = String(i) === index;
+          t.classList.toggle("is-active", active);
+          t.classList.toggle("border-transparent", active);
+          t.classList.toggle("bg-[image:var(--background-image-gradient-secondary)]", active);
+          t.classList.toggle("bg-light", !active);
+          t.classList.toggle("border-dark/10", !active);
+          const num = t.querySelector(".step-num");
+          const label = t.querySelector(".step-label");
+          num?.classList.toggle("bg-[image:var(--background-image-gradient-light)]", active);
+          num?.classList.toggle("text-text-dark", active);
+          num?.classList.toggle("bg-[image:var(--background-image-gradient-dark)]", !active);
+          num?.classList.toggle("text-light", !active);
+          label?.classList.toggle("text-light", active);
+          label?.classList.toggle("text-text-dark", !active);
+        });
+        panels.forEach((panel, i) => {
+          panel.classList.toggle("hidden", String(i) !== index);
+        });
+      });
+    });
   }
-
-  .vertical-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid var(--line);
-  }
-
-  .vertical-item {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 1rem;
-    align-items: start;
-    padding: 1.35rem 0.15rem;
-    border-bottom: 1px solid var(--line);
-    transition: background 0.35s var(--ease), padding-left 0.35s var(--ease);
-  }
-
-  .vertical-item:hover {
-    background: linear-gradient(90deg, rgba(0, 45, 136, 0.04), transparent 60%);
-    padding-left: 0.55rem;
-  }
-
-  .index {
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: var(--blue);
-    font-size: 0.95rem;
-    padding-top: 0.2rem;
-  }
-
-  h3 {
-    font-size: 1.15rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .vertical-item p {
-    color: var(--ink-soft);
-    font-size: 0.96rem;
-    max-width: 52ch;
-  }
-
-  .arrow {
-    color: var(--gold-deep);
-    font-size: 1.25rem;
-    opacity: 0;
-    transform: translateX(-6px);
-    transition:
-      opacity 0.35s var(--ease),
-      transform 0.35s var(--ease);
-    padding-top: 0.15rem;
-  }
-
-  .vertical-item:hover .arrow {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  @media (min-width: 800px) {
-    .vertical-item {
-      grid-template-columns: 3.5rem 1fr auto;
-      gap: 1.5rem;
-      padding: 1.55rem 0.25rem;
-      align-items: center;
-    }
-
-    h3 {
-      font-size: 1.3rem;
-    }
-  }
-</style>
+</script>
