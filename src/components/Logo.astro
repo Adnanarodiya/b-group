@@ -1,0 +1,42 @@
+---
+interface Props {
+  variant?: "dark" | "light";
+  height?: number;
+}
+
+const { variant = "dark", height = 34 } = Astro.props;
+const text = variant === "light" ? "#ffffff" : "#16338a";
+const width = Math.round(height * (168 / 40));
+---
+
+<svg
+  width={width}
+  height={height}
+  viewBox="0 0 168 40"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="Bi Group"
+>
+  <text
+    x="0"
+    y="31"
+    font-family="Manrope, system-ui, sans-serif"
+    font-style="italic"
+    font-weight="800"
+    font-size="34"
+    letter-spacing="-1"
+    fill={text}>B</text>
+  <!-- dotless i drawn as a bar, with the brand-yellow tittle above it -->
+  <rect x="27" y="14" width="6.5" height="17" rx="1.5" transform="skewX(-12)" fill={text}></rect>
+  <rect x="31" y="3" width="7.5" height="7.5" rx="1.5" transform="skewX(-12)" fill="#f6b40e"></rect>
+  <text
+    x="40"
+    y="31"
+    font-family="Manrope, system-ui, sans-serif"
+    font-style="italic"
+    font-weight="800"
+    font-size="26"
+    letter-spacing="0.5"
+    fill={text}>GROUP</text>
+</svg>

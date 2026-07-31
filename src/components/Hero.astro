@@ -1,0 +1,236 @@
+---
+---
+
+<section class="hero" id="top">
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__glow hero__glow--1"></div>
+    <div class="hero__glow hero__glow--2"></div>
+    <svg class="hero__grid" width="100%" height="100%">
+      <defs>
+        <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
+          <path
+            d="M 56 0 L 0 0 0 56"
+            fill="none"
+            stroke="rgba(255,255,255,0.05)"
+            stroke-width="1"></path>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)"></rect>
+    </svg>
+  </div>
+
+  <div class="container hero__content">
+    <p class="hero__kicker" data-reveal>
+      <span class="hero__kicker-dot"></span>
+      A diversified Indian conglomerate
+    </p>
+    <h1 class="hero__title" data-reveal style="--reveal-delay: 90ms">
+      One Group.<br />
+      Many Businesses.<br />
+      <span class="hero__title-accent">One Promise of Quality.</span>
+    </h1>
+    <p class="hero__lede" data-reveal style="--reveal-delay: 180ms">
+      From industrial paints trusted by India's largest engineering companies
+      to modular kitchens, agriculture, electronics and beyond — Bi Group
+      builds products and solutions that power everyday life.
+    </p>
+    <div class="hero__actions" data-reveal style="--reveal-delay: 270ms">
+      <a class="btn btn--primary" href="#businesses">
+        Explore Our Businesses
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a class="btn btn--ghost-light" href="#contact">Get in Touch</a>
+    </div>
+
+    <ul class="hero__badges" data-reveal style="--reveal-delay: 360ms">
+      <li>10 Business Verticals</li>
+      <li>Trusted by L&amp;T, Godrej &amp; the Ministry of Defence</li>
+      <li>Made in India</li>
+    </ul>
+  </div>
+
+  <a class="hero__scroll" href="#about" aria-label="Scroll to About section">
+    <span></span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-block: 9rem 6rem;
+    background: linear-gradient(158deg, var(--navy-900) 0%, var(--navy-700) 55%, var(--navy-800) 100%);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero__grid {
+    position: absolute;
+    inset: 0;
+    mask-image: radial-gradient(ellipse 90% 80% at 60% 30%, black 30%, transparent 75%);
+  }
+
+  .hero__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.55;
+    animation: drift 14s ease-in-out infinite alternate;
+  }
+
+  .hero__glow--1 {
+    width: 560px;
+    height: 560px;
+    right: -140px;
+    top: -160px;
+    background: radial-gradient(circle, rgba(36, 80, 200, 0.85), transparent 65%);
+  }
+
+  .hero__glow--2 {
+    width: 420px;
+    height: 420px;
+    left: -120px;
+    bottom: -180px;
+    background: radial-gradient(circle, rgba(246, 180, 14, 0.28), transparent 65%);
+    animation-delay: -7s;
+  }
+
+  @keyframes drift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(40px, 30px, 0) scale(1.08);
+    }
+  }
+
+  .hero__content {
+    position: relative;
+  }
+
+  .hero__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .hero__kicker-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--yellow-500);
+    box-shadow: 0 0 0 4px rgba(246, 180, 14, 0.25);
+  }
+
+  .hero__title {
+    margin-top: 1.6rem;
+    font-size: clamp(2.5rem, 6.5vw, 4.6rem);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    max-width: 16ch;
+  }
+
+  .hero__title-accent {
+    color: var(--yellow-500);
+  }
+
+  .hero__lede {
+    margin-top: 1.5rem;
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 56ch;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.4rem;
+  }
+
+  .hero__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 2rem;
+    margin: 3.2rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .hero__badges li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .hero__badges li::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--yellow-500);
+  }
+
+  .hero__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 2rem;
+    transform: translateX(-50%);
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+
+  .hero__scroll span {
+    width: 4px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--yellow-500);
+    animation: scroll-hint 1.8s ease-in-out infinite;
+  }
+
+  @keyframes scroll-hint {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    60% {
+      transform: translateY(10px);
+      opacity: 0.2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero__scroll {
+      display: none;
+    }
+  }
+</style>

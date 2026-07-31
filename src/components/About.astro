@@ -1,0 +1,121 @@
+---
+const pillars = [
+  {
+    title: "Diversified by design",
+    text: "Ten focused businesses under one roof — from industrial coatings to consumer electronics — sharing capital, talent and a common standard of quality.",
+  },
+  {
+    title: "Engineering-grade quality",
+    text: "Our flagship paints and coatings protect assets for AM/NS India, Larsen & Toubro and the Ministry of Defence. The same rigour runs through every vertical.",
+  },
+  {
+    title: "Built for India, and beyond",
+    text: "Products designed for Indian conditions, made in India, and increasingly reaching customers worldwide through our own e-commerce channels.",
+  },
+];
+---
+
+<section class="about section" id="about">
+  <div class="container about__grid">
+    <div class="about__intro">
+      <p class="eyebrow" data-reveal>About Bi Group</p>
+      <h2 class="section-title" data-reveal style="--reveal-delay: 80ms">
+        A house of brands with quality at its core
+      </h2>
+      <p class="section-lede" data-reveal style="--reveal-delay: 160ms">
+        Bi Group began with a simple conviction: that world-class products can
+        be imagined, engineered and manufactured in India. Today that
+        conviction spans paints, kitchens, farms, clinics, wardrobes and
+        living rooms — a family of businesses united by one name and one
+        promise.
+      </p>
+      <a
+        class="btn btn--navy about__cta"
+        href="#businesses"
+        data-reveal
+        style="--reveal-delay: 240ms"
+      >
+        Discover the Group
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="about__pillars">
+      {pillars.map((pillar, i) => (
+        <article
+          class="pillar"
+          data-reveal
+          style={`--reveal-delay: ${120 + i * 110}ms`}
+        >
+          <span class="pillar__index">{String(i + 1).padStart(2, "0")}</span>
+          <div>
+            <h3 class="pillar__title">{pillar.title}</h3>
+            <p class="pillar__text">{pillar.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 6vw, 5.5rem);
+    align-items: start;
+  }
+
+  .about__cta {
+    margin-top: 2.2rem;
+  }
+
+  .about__pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .pillar {
+    display: flex;
+    gap: 1.4rem;
+    padding: 1.7rem 1.8rem;
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .pillar:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: transparent;
+  }
+
+  .pillar__index {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--yellow-500);
+    line-height: 1.9;
+  }
+
+  .pillar__title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--navy-800);
+  }
+
+  .pillar__text {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 900px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

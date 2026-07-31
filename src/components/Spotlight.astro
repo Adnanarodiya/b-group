@@ -1,0 +1,231 @@
+---
+const highlights = [
+  "Industrial & protective coatings for steel, infrastructure and defence",
+  "Decorative emulsions and color-coating systems for modern homes",
+  "Specified by AM/NS India, Larsen & Toubro and the Ministry of Defence",
+  "In-house R&D lab with batch-level quality certification",
+];
+
+const swatches = [
+  { name: "Signal Navy", hex: "#16338a" },
+  { name: "Turmeric", hex: "#f6b40e" },
+  { name: "Monsoon Teal", hex: "#0f766e" },
+  { name: "Terracotta", hex: "#c2551b" },
+  { name: "Mist Grey", hex: "#94a3b8" },
+  { name: "Ivory", hex: "#f4efe6" },
+];
+---
+
+<section class="spotlight section" id="spotlight">
+  <div class="container spotlight__grid">
+    <div class="spotlight__visual" data-reveal aria-hidden="true">
+      <div class="spotlight__panel">
+        <div class="spotlight__drips">
+          <span style="--c: #f6b40e; --h: 78%; --d: 0s"></span>
+          <span style="--c: #2450c8; --h: 92%; --d: 0.25s"></span>
+          <span style="--c: #0f766e; --h: 64%; --d: 0.5s"></span>
+          <span style="--c: #c2551b; --h: 84%; --d: 0.75s"></span>
+          <span style="--c: #94a3b8; --h: 58%; --d: 1s"></span>
+        </div>
+        <div class="spotlight__swatches">
+          {swatches.map((swatch) => (
+            <div class="swatch">
+              <span class="swatch__chip" style={`background:${swatch.hex}`}></span>
+              <span class="swatch__meta">
+                <strong>{swatch.name}</strong>
+                <em>{swatch.hex}</em>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="spotlight__tag">
+        <strong>3,000+</strong>
+        <span>tintable shades</span>
+      </div>
+    </div>
+
+    <div class="spotlight__copy">
+      <p class="eyebrow" data-reveal>Flagship Spotlight</p>
+      <h2 class="section-title" data-reveal style="--reveal-delay: 80ms">
+        Bi Paints — color and protection, engineered
+      </h2>
+      <p class="section-lede" data-reveal style="--reveal-delay: 160ms">
+        Our flagship business is where Bi Group's reputation was forged. Bi
+        Paints &amp; Color Coating delivers finishes that survive salt air,
+        monsoon humidity and industrial wear — the reason India's most
+        demanding engineering companies keep coming back.
+      </p>
+
+      <ul class="spotlight__list">
+        {highlights.map((item, i) => (
+          <li data-reveal style={`--reveal-delay: ${220 + i * 90}ms`}>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <circle cx="10" cy="10" r="9" fill="rgba(246,180,14,0.18)" />
+              <path d="m6.5 10.5 2.4 2.4 4.6-5.4" stroke="#b57f00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      <a class="btn btn--navy" href="#contact" data-reveal style="--reveal-delay: 620ms">
+        Talk to a Coatings Expert
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .spotlight__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: clamp(2.5rem, 6vw, 5.5rem);
+    align-items: center;
+  }
+
+  .spotlight__visual {
+    position: relative;
+  }
+
+  .spotlight__panel {
+    background: linear-gradient(160deg, var(--navy-800), var(--navy-600));
+    border-radius: var(--radius-lg);
+    padding: 2.2rem;
+    overflow: hidden;
+    box-shadow: 0 32px 64px -24px rgba(11, 29, 77, 0.45);
+  }
+
+  .spotlight__drips {
+    display: flex;
+    gap: 12px;
+    height: 130px;
+    margin-bottom: 2rem;
+  }
+
+  .spotlight__drips span {
+    flex: 1;
+    border-radius: 0 0 999px 999px;
+    background: var(--c);
+    height: var(--h);
+    transform-origin: top;
+    animation: drip 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--d);
+  }
+
+  @keyframes drip {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  .spotlight__swatches {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.8rem;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+  }
+
+  .swatch__chip {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  }
+
+  .swatch__meta {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+
+  .swatch__meta strong {
+    font-size: 0.82rem;
+    color: #fff;
+  }
+
+  .swatch__meta em {
+    font-style: normal;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .spotlight__tag {
+    position: absolute;
+    right: -14px;
+    bottom: -18px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.4rem;
+    background: var(--yellow-500);
+    color: var(--navy-900);
+    border-radius: var(--radius-md);
+    box-shadow: 0 20px 40px -16px rgba(246, 180, 14, 0.6);
+    line-height: 1.25;
+  }
+
+  .spotlight__tag strong {
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+
+  .spotlight__tag span {
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .spotlight__list {
+    list-style: none;
+    padding: 0;
+    margin: 1.8rem 0 2.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .spotlight__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .spotlight__list svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .spotlight__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .spotlight__visual {
+      order: 2;
+    }
+
+    .spotlight__tag {
+      right: 8px;
+    }
+  }
+</style>

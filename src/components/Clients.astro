@@ -1,0 +1,134 @@
+---
+const clients = [
+  "AM/NS India",
+  "Larsen & Toubro",
+  "Godrej & Boyce",
+  "Ministry of Defence",
+  "Chowgule Group",
+  "ElectroMech",
+  "UNP Polyvalves",
+  "Lohr India",
+  "Marini Fayat Group",
+  "Laxmipati Engineering",
+  "NAFTech",
+];
+---
+
+<section class="clients section" id="clients">
+  <div class="container clients__head">
+    <p class="eyebrow" data-reveal>Trusted By</p>
+    <h2 class="section-title" data-reveal style="--reveal-delay: 80ms">
+      In the company of India's finest
+    </h2>
+    <p class="section-lede" data-reveal style="--reveal-delay: 160ms">
+      Industry leaders and government institutions choose Bi Group where
+      performance is non-negotiable.
+    </p>
+  </div>
+
+  <div class="marquee" data-reveal style="--reveal-delay: 240ms">
+    <div class="marquee__track" aria-hidden="false">
+      {[0, 1].map((copy) => (
+        <ul class="marquee__group" aria-hidden={copy === 1 ? "true" : undefined}>
+          {clients.map((client) => (
+            <li class="marquee__item">{client}</li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .clients {
+    padding-bottom: calc(var(--section-pad) * 0.8);
+  }
+
+  .clients__head {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  .clients__head .section-lede {
+    margin-inline: auto;
+  }
+
+  .marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+  }
+
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: marquee 38s linear infinite;
+  }
+
+  .marquee:hover .marquee__track {
+    animation-play-state: paused;
+  }
+
+  .marquee__group {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 0 0.6rem;
+    margin: 0;
+    list-style: none;
+  }
+
+  .marquee__item {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 1rem 2.1rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper);
+    font-size: 1.02rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: var(--navy-800);
+    box-shadow: var(--shadow-card);
+    transition: border-color 0.25s ease, color 0.25s ease;
+  }
+
+  .marquee__item:hover {
+    border-color: var(--yellow-500);
+    color: var(--navy-600);
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track {
+      animation: none;
+      flex-wrap: wrap;
+      width: auto;
+      justify-content: center;
+    }
+
+    .marquee__group[aria-hidden="true"] {
+      display: none;
+    }
+
+    .marquee__group {
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 1.2rem;
+    }
+  }
+</style>

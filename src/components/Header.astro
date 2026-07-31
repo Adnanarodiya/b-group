@@ -1,0 +1,296 @@
+---
+import Logo from "./Logo.astro";
+
+const navLinks = [
+  { label: "About Us", href: "#about" },
+  { label: "Businesses", href: "#businesses" },
+  { label: "Sustainability", href: "#why" },
+  { label: "Investors", href: "#stats" },
+  { label: "Newsroom", href: "#clients" },
+  { label: "Bi Foundation", href: "#about" },
+  { label: "E-Commerce", href: "#businesses" },
+  { label: "Career", href: "#contact" },
+];
+---
+
+<header class="header" id="site-header">
+  <div class="container header__inner">
+    <a class="header__logo" href="#top" aria-label="Bi Group — home">
+      <span class="logo-dark"><Logo variant="dark" /></span>
+      <span class="logo-light"><Logo variant="light" /></span>
+    </a>
+
+    <nav class="header__nav" aria-label="Primary">
+      {navLinks.map((link) => (
+        <a class="nav-link" href={link.href}>{link.label}</a>
+      ))}
+    </nav>
+
+    <div class="header__actions">
+      <a class="btn btn--primary header__cta" href="#contact">Contact Us</a>
+      <button
+        class="header__burger"
+        id="nav-toggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <nav aria-label="Mobile">
+      {navLinks.map((link, i) => (
+        <a class="mobile-menu__link" style={`--i: ${i}`} href={link.href}>
+          {link.label}
+        </a>
+      ))}
+      <a class="btn btn--primary mobile-menu__cta" href="#contact">Contact Us</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 100;
+    transition: background-color 0.35s ease, box-shadow 0.35s ease,
+      backdrop-filter 0.35s ease;
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    height: 80px;
+    transition: height 0.35s ease;
+  }
+
+  .header__logo {
+    display: inline-flex;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  /* Over the dark hero: light logo & links. Once scrolled: dark on white. */
+  .logo-dark {
+    display: none;
+  }
+
+  .header.is-scrolled,
+  .header.menu-open {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 var(--line), 0 12px 32px -20px rgba(11, 29, 77, 0.35);
+  }
+
+  .header.is-scrolled .header__inner,
+  .header.menu-open .header__inner {
+    height: 68px;
+  }
+
+  .header.is-scrolled .logo-dark,
+  .header.menu-open .logo-dark {
+    display: block;
+  }
+
+  .header.is-scrolled .logo-light,
+  .header.menu-open .logo-light {
+    display: none;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.6rem, 1.6vw, 1.5rem);
+  }
+
+  .nav-link {
+    position: relative;
+    padding: 0.4rem 0.15rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.88);
+    transition: color 0.25s ease;
+    white-space: nowrap;
+  }
+
+  /* Jotun-style animated underline that slides in from the left */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2.5px;
+    border-radius: 2px;
+    background: var(--yellow-500);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-link:hover {
+    color: #fff;
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  .header.is-scrolled .nav-link {
+    color: var(--ink-soft);
+  }
+
+  .header.is-scrolled .nav-link:hover {
+    color: var(--navy-700);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .header__cta {
+    padding: 0.65rem 1.35rem;
+    font-size: 0.9rem;
+  }
+
+  .header__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    background: none;
+    border: 0;
+  }
+
+  .header__burger span {
+    display: block;
+    height: 2.5px;
+    width: 100%;
+    border-radius: 2px;
+    background: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+  }
+
+  .header.is-scrolled .header__burger span,
+  .header.menu-open .header__burger span {
+    background: var(--navy-800);
+  }
+
+  .header.menu-open .header__burger span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+  }
+
+  .header.menu-open .header__burger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header.menu-open .header__burger span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+  }
+
+  /* Explicit top/height instead of `inset: 0` because the header's
+     backdrop-filter makes it the containing block for this fixed element. */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 68px;
+    left: 0;
+    width: 100%;
+    height: calc(100dvh - 68px);
+    background: #fff;
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+  }
+
+  .header.menu-open .mobile-menu {
+    display: block;
+  }
+
+  .mobile-menu nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    max-width: var(--container);
+    margin-inline: auto;
+  }
+
+  .mobile-menu__link {
+    padding: 0.85rem 0.25rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy-800);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: menu-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--i) * 45ms);
+  }
+
+  .mobile-menu__cta {
+    margin-top: 1.5rem;
+    align-self: flex-start;
+  }
+
+  @keyframes menu-in {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 1080px) {
+    .header__nav {
+      display: none;
+    }
+
+    .header__burger {
+      display: flex;
+    }
+
+    .header__cta {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const header = document.getElementById("site-header")!;
+  const toggle = document.getElementById("nav-toggle")!;
+  const menu = document.getElementById("mobile-menu")!;
+
+  const onScroll = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 24);
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  toggle.addEventListener("click", () => {
+    const open = header.classList.toggle("menu-open");
+    toggle.setAttribute("aria-expanded", String(open));
+    document.body.style.overflow = open ? "hidden" : "";
+  });
+
+  menu.addEventListener("click", (e) => {
+    if ((e.target as HTMLElement).closest("a")) {
+      header.classList.remove("menu-open");
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    }
+  });
+</script>
