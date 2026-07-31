@@ -3,14 +3,17 @@ const reasons = [
   {
     title: "Industrial Credibility",
     text: "Coatings and engineering DNA trusted by defence, steel, and infrastructure leaders.",
+    accent: "bg-secondary",
   },
   {
     title: "Diversified Strength",
     text: "A multi-vertical model connecting factories, projects, homes, and digital commerce.",
+    accent: "bg-quinary",
   },
   {
     title: "Partnership Mindset",
     text: "Long-term relationships built on responsiveness, clarity, and measurable delivery.",
+    accent: "bg-tertiary",
   },
 ];
 ---
@@ -18,7 +21,7 @@ const reasons = [
 <section class="section" id="why">
   <div class="container">
     <div class="reveal mb-10">
-      <h2 class="text-center gradient-text text-[clamp(2rem,4vw,3.2rem)]">
+      <h2 class="text-center gradient-text text-[clamp(2.1rem,4.4vw,3.4rem)]">
         Why Choose
         <br />
         <em>BiGROUP</em>
@@ -27,11 +30,16 @@ const reasons = [
 
     <div class="grid md:grid-cols-3 gap-6">
       {
-        reasons.map((reason) => (
-          <article class="reveal bg-light rounded-3xl p-8 card-shadow">
-            <div class="size-3 bg-secondary mb-6"></div>
-            <h3 class="text-2xl mb-3">{reason.title}</h3>
-            <p class="text-text-dark text-lg">{reason.text}</p>
+        reasons.map((reason, i) => (
+          <article
+            class={`reveal reveal-delay-${(i % 3) + 1} bg-light rounded-3xl p-8 card-shadow relative overflow-hidden`}
+          >
+            <div
+              class={`absolute -top-10 -right-10 size-28 rounded-full blur-2xl opacity-50 ${reason.accent}`}
+            />
+            <div class={`size-3 ${reason.accent} mb-6 relative z-10`} />
+            <h3 class="text-2xl mb-3 relative z-10">{reason.title}</h3>
+            <p class="text-text-dark text-lg relative z-10">{reason.text}</p>
           </article>
         ))
       }

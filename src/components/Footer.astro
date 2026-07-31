@@ -23,9 +23,16 @@ const columns = [
 ];
 ---
 
-<footer class="pt-8 pb-10" id="contact">
+<footer class="pt-4 pb-10" id="contact">
   <div class="container">
-    <div class="bg-dark text-light rounded-[2rem] md:rounded-[3rem] p-8 md:p-12">
+    <div class="bg-primary text-light rounded-[2rem] md:rounded-[3.5rem] p-8 md:p-12 relative overflow-hidden">
+      <div class="glow-blob -top-20 -right-16 size-64 bg-secondary/30"></div>
+      <div
+        class="glow-blob -bottom-24 -left-16 size-72 bg-quinary/25"
+        style="animation-delay:1s"
+      >
+      </div>
+      <div class="relative z-10">
       <div class="grid lg:grid-cols-[1.3fr_0.8fr_0.8fr_1.2fr] gap-10">
         <div>
           <img src="/logo-light.svg" alt="BiGROUP" class="h-9 w-auto" />
@@ -74,6 +81,7 @@ const columns = [
       >
         <p>© {new Date().getFullYear()} BiGROUP. All rights reserved.</p>
         <a href="#top" class="hover:text-secondary">Back to top ↑</a>
+      </div>
       </div>
     </div>
   </div>

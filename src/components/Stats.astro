@@ -1,18 +1,21 @@
 ---
 const stats = [
-  { value: "10+", label: "Business verticals" },
-  { value: "11+", label: "Enterprise clients highlighted" },
-  { value: "₹500 Cr", label: "Paints investment announced" },
-  { value: "Pan-India", label: "Ambition across industries" },
+  { value: "10+", label: "Business verticals", tone: "from-secondary/40 to-primary/10" },
+  { value: "11+", label: "Enterprise clients highlighted", tone: "from-quinary/40 to-primary/10" },
+  { value: "₹500 Cr", label: "Paints investment announced", tone: "from-tertiary/40 to-secondary/20" },
+  { value: "Pan-India", label: "Ambition across industries", tone: "from-primary/20 to-secondary/30" },
 ];
 ---
 
-<section class="section pt-8" aria-label="At a glance">
+<section class="section pt-6 md:pt-8" aria-label="At a glance">
   <div class="container">
     <div class="reveal grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {
-        stats.map((stat) => (
-          <article class="bg-light rounded-3xl p-7 card-shadow">
+        stats.map((stat, i) => (
+          <article
+            class={`reveal-delay-${(i % 3) + 1} bg-light rounded-3xl p-7 card-shadow relative overflow-hidden`}
+          >
+            <div class={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${stat.tone}`} />
             <p class="text-3xl md:text-4xl font-semibold text-primary tracking-tight">
               {stat.value}
             </p>

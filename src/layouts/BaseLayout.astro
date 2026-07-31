@@ -20,7 +20,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#002D88" />
+    <meta name="theme-color" content="#05297D" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -44,12 +44,20 @@ const {
               }
             }
           },
-          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+          { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
         );
         reveals.forEach((el) => io.observe(el));
       } else {
         reveals.forEach((el) => el.classList.add("is-visible"));
       }
+
+      // Close mobile nav after clicking a link
+      document.querySelectorAll(".navbar a[href^='#']").forEach((link) => {
+        link.addEventListener("click", () => {
+          const toggle = document.getElementById("nav-toggle");
+          if (toggle instanceof HTMLInputElement) toggle.checked = false;
+        });
+      });
     </script>
   </body>
 </html>

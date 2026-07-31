@@ -3,12 +3,14 @@ interface Props {
   href: string;
   label: string;
   class?: string;
+  variant?: "dark" | "primary";
 }
 
-const { href, label, class: className = "" } = Astro.props;
+const { href, label, class: className = "", variant = "dark" } = Astro.props;
+const variantClass = variant === "primary" ? "btn-primary" : "";
 ---
 
-<a href={href} class={`btn-dark ${className}`}>
+<a href={href} class={`btn-dark ${variantClass} ${className}`}>
   <span class="btn-label">
     <span>{label}</span>
     <span>{label}</span>

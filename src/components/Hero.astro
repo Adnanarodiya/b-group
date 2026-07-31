@@ -3,31 +3,31 @@ import IconButton from "./IconButton.astro";
 
 const features = [
   { n: "01", title: "Paints &", em: "Coatings", tone: "bg-primary/10 text-primary" },
-  { n: "02", title: "Modular", em: "Kitchen", tone: "bg-secondary/20 text-dark" },
-  { n: "03", title: "Engineering", em: "Solutions", tone: "bg-tertiary/15 text-primary" },
-  { n: "04", title: "Consumer", em: "Verticals", tone: "bg-quaternary/40 text-dark" },
+  { n: "02", title: "Modular", em: "Kitchen", tone: "bg-secondary/25 text-dark" },
+  { n: "03", title: "Engineering", em: "Solutions", tone: "bg-quinary/20 text-primary" },
+  { n: "04", title: "Consumer", em: "Verticals", tone: "bg-tertiary/20 text-dark" },
 ];
 ---
 
 <section
   id="top"
-  class="relative pt-40 rounded-b-[60px] overflow-hidden min-h-max bg-gradient-to-r from-primary/10 to-body pb-16 md:pb-8"
+  class="relative pt-40 rounded-b-[60px] overflow-hidden min-h-max bg-gradient-to-r from-secondary/10 via-body to-quinary/10 pb-20 md:pb-10"
 >
   <div
-    class="absolute inset-0 -z-0 h-full w-full opacity-20"
+    class="absolute inset-0 -z-0 h-full w-full opacity-25"
     style="background-image:linear-gradient(to right, var(--color-secondary) 1px, transparent 1px),linear-gradient(to bottom, var(--color-secondary) 1px, transparent 1px);background-size:32px 32px;mask-image:linear-gradient(to right, transparent, black 80%);-webkit-mask-image:linear-gradient(to right, transparent, black 80%)"
   >
   </div>
+  <div class="glow-blob -bottom-16 -left-40 z-0 size-80 md:size-[28rem] bg-secondary/35 mix-blend-multiply">
+  </div>
   <div
-    class="absolute -bottom-16 -left-40 z-0 size-80 md:size-[28rem] bg-secondary/20 rounded-full blur-[100px] mix-blend-multiply"
+    class="glow-blob -bottom-16 -right-40 z-0 size-80 md:size-[28rem] bg-tertiary/30 mix-blend-multiply"
+    style="animation-delay:1s"
   >
   </div>
   <div
-    class="absolute -bottom-16 -right-40 z-0 size-80 md:size-[28rem] bg-tertiary/20 rounded-full blur-[100px] mix-blend-multiply"
-  >
-  </div>
-  <div
-    class="absolute -top-40 left-1/2 -translate-x-1/2 z-0 size-72 md:size-[22rem] bg-quaternary/30 rounded-full blur-[100px] opacity-70"
+    class="glow-blob -top-40 left-1/2 -translate-x-1/2 z-0 size-72 md:size-[22rem] bg-quinary/25"
+    style="animation-delay:2s"
   >
   </div>
 
@@ -40,7 +40,7 @@ const features = [
         <span class="text-text-dark text-sm font-medium">BiGROUP</span>
       </div>
 
-      <h1 class="hero-title text-center mt-10 mb-8 max-w-4xl">
+      <h1 class="hero-title text-center mt-10 mb-8 max-w-5xl">
         Building India’s Future
         <br />
         <em>Across <mark>Industries</mark></em>
@@ -54,11 +54,13 @@ const features = [
     </div>
 
     <div
-      class="hero-features-wrapper flex items-center justify-center mx-auto md:translate-y-8 flex-col md:flex-row gap-y-6"
+      class="hero-features-wrapper relative z-20 flex items-center justify-center mx-auto md:translate-y-12 flex-col md:flex-row gap-y-6"
     >
       {
-        features.map((item) => (
-          <div class="hero-feature-card bg-light pt-9 px-8 pb-10 rounded-3xl card-shadow flex flex-col gap-y-16 h-full w-full md:w-64 shrink-0 md:-ml-6 first:ml-0">
+        features.map((item, i) => (
+          <div
+            class={`reveal reveal-delay-${(i % 3) + 1} hero-feature-card bg-light pt-9 px-8 pb-10 rounded-3xl card-shadow flex flex-col gap-y-16 h-full w-full md:w-64 shrink-0 md:-ml-6 first:ml-0`}
+          >
             <div class="flex justify-between items-start">
               <div
                 class={`size-16 rounded-2xl flex items-center justify-center font-semibold ${item.tone}`}

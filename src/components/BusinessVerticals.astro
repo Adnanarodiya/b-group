@@ -55,10 +55,19 @@ const steps = [
 ];
 ---
 
-<section class="section bg-gradient-to-b from-[#eef3ff] to-body rounded-[60px] relative overflow-hidden" id="businesses">
-  <div class="container">
+<section
+  class="section bg-[image:var(--background-image-gradient-secondary-light)] rounded-[60px] relative overflow-hidden"
+  id="businesses"
+>
+  <div class="glow-blob -top-20 right-10 size-64 bg-secondary/30"></div>
+  <div
+    class="glow-blob bottom-10 -left-16 size-72 bg-quinary/25"
+    style="animation-delay:1.4s"
+  >
+  </div>
+  <div class="container relative z-10">
     <div class="reveal">
-      <h2 class="text-center gradient-text text-[clamp(2rem,4vw,3.2rem)] mb-4">
+      <h2 class="text-center gradient-text text-[clamp(2.1rem,4.4vw,3.4rem)] mb-4">
         Get to Know
         <br />
         Bi <em>Easily</em>
@@ -99,7 +108,8 @@ const steps = [
                     index === 0 ? "text-light" : "text-text-dark",
                   ]}
                 >
-                  {step.name} <em>{step.em}</em>
+                  {step.name}{" "}
+                  <em class={index === 0 ? "text-secondary" : "text-primary"}>{step.em}</em>
                 </span>
               </button>
             </li>
@@ -140,7 +150,7 @@ const steps = [
             <div class="lg:pt-10 sm:px-8 lg:pr-8 overflow-hidden pb-8">
               <div class="bg-[image:var(--background-image-gradient-secondary)] sm:rounded-[2rem] p-6 h-full">
                 <h3 class="text-2xl text-light has-em mb-4">
-                  {step.highlight.title} <em class="text-secondary">{step.highlight.em}</em>
+                  {step.highlight.title} <em class="!text-secondary !bg-none" style="-webkit-text-fill-color:#F5B412;color:#F5B412">{step.highlight.em}</em>
                 </h3>
                 <p class="text-light/90 font-light text-lg mb-8">{step.highlight.text}</p>
                 <div class="grid gap-4">
@@ -183,6 +193,9 @@ const steps = [
           num?.classList.toggle("text-light", !active);
           label?.classList.toggle("text-light", active);
           label?.classList.toggle("text-text-dark", !active);
+          const em = t.querySelector("em");
+          em?.classList.toggle("text-secondary", active);
+          em?.classList.toggle("text-primary", !active);
         });
         panels.forEach((panel, i) => {
           panel.classList.toggle("hidden", String(i) !== index);

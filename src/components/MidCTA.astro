@@ -5,19 +5,23 @@ import IconButton from "./IconButton.astro";
 <section class="section">
   <div class="container">
     <div
-      class="py-20 md:py-28 px-6 bg-light rounded-[2rem] md:rounded-[3rem] relative overflow-hidden"
+      class="py-20 md:py-28 px-6 bg-light rounded-[2rem] md:rounded-[3.5rem] relative overflow-hidden isolate"
     >
+      <div class="glow-blob top-1/2 -right-24 -translate-y-1/2 size-60 md:size-96 bg-secondary">
+      </div>
       <div
-        class="absolute top-1/2 -right-24 -translate-y-1/2 size-60 md:size-80 bg-secondary rounded-full blur-[70px] opacity-70"
+        class="glow-blob top-1/2 -left-24 -translate-y-1/2 size-60 md:size-96 bg-tertiary"
+        style="animation-delay:1.2s"
       >
       </div>
       <div
-        class="absolute top-1/2 -left-24 -translate-y-1/2 size-60 md:size-80 bg-tertiary rounded-full blur-[70px] opacity-50"
+        class="glow-blob top-0 left-1/2 -translate-x-1/2 size-40 md:size-64 bg-quinary/70"
+        style="animation-delay:0.6s"
       >
       </div>
 
       <div class="reveal flex flex-col justify-center items-center text-center gap-6 relative z-10">
-        <h2 class="gradient-text text-[clamp(2rem,4vw,3.2rem)]">
+        <h2 class="gradient-text text-[clamp(2.1rem,4.4vw,3.4rem)]">
           Protecting What
           <br />
           <em>India</em> Builds
@@ -26,7 +30,7 @@ import IconButton from "./IconButton.astro";
           From industrial coatings to everyday verticals — BiGROUP turns capability into clear
           results.
         </p>
-        <IconButton href="#contact" label="Talk to BiGROUP" />
+        <IconButton href="#contact" label="Talk to BiGROUP" variant="primary" />
       </div>
     </div>
   </div>

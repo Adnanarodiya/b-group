@@ -5,11 +5,26 @@ import IconButton from "./IconButton.astro";
 <section class="section" id="cta">
   <div class="container">
     <div
-      class="reveal relative overflow-hidden rounded-[2rem] md:rounded-[3rem] px-6 py-16 md:py-20 text-center bg-[image:var(--background-image-gradient-secondary)]"
+      class="reveal relative overflow-hidden rounded-[2rem] md:rounded-[3.5rem] px-6 py-16 md:py-22 text-center bg-primary"
     >
-      <div class="absolute inset-0 bg-primary/20"></div>
+      <div
+        class="absolute inset-0 bg-[image:var(--background-image-gradient-cta)] opacity-95"
+      >
+      </div>
+      <div class="glow-blob -top-16 -left-10 size-56 md:size-80 bg-secondary/50"></div>
+      <div
+        class="glow-blob -bottom-20 -right-10 size-64 md:size-96 bg-quinary/40"
+        style="animation-delay:1s"
+      >
+      </div>
+      <div
+        class="glow-blob top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-48 bg-tertiary/25"
+        style="animation-delay:0.5s"
+      >
+      </div>
+
       <div class="relative z-10 flex flex-col items-center gap-5">
-        <h2 class="text-light text-[clamp(2rem,4vw,3.2rem)]">
+        <h2 class="text-light text-[clamp(2.1rem,4.4vw,3.4rem)]">
           Ready to Partner
           <br />
           With <em class="text-secondary">BiGROUP</em>?
@@ -18,10 +33,16 @@ import IconButton from "./IconButton.astro";
           Tell us about your project, supply need, or collaboration — we’ll connect you with the
           right vertical.
         </p>
-        <ul class="flex flex-wrap justify-center gap-3 text-light/90 text-sm font-medium mb-2">
-          <li class="bg-light/10 rounded-full px-4 py-2">No obligation enquiry</li>
-          <li class="bg-light/10 rounded-full px-4 py-2">Right vertical match</li>
-          <li class="bg-light/10 rounded-full px-4 py-2">Enterprise-ready support</li>
+        <ul class="flex flex-wrap justify-center gap-3 text-light/95 text-sm font-medium mb-2">
+          <li class="bg-light/10 backdrop-blur-sm rounded-full px-4 py-2 border border-light/10">
+            No obligation enquiry
+          </li>
+          <li class="bg-light/10 backdrop-blur-sm rounded-full px-4 py-2 border border-light/10">
+            Right vertical match
+          </li>
+          <li class="bg-light/10 backdrop-blur-sm rounded-full px-4 py-2 border border-light/10">
+            Enterprise-ready support
+          </li>
         </ul>
         <IconButton href="#contact" label="Contact BiGROUP" />
       </div>

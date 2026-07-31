@@ -10,6 +10,7 @@ const cards = [
       "Long-term partnership mindset",
     ],
     reverse: false,
+    media: "from-secondary/50 via-quinary/30 to-primary/25",
   },
   {
     title: "Quality Without",
@@ -17,6 +18,7 @@ const cards = [
     text: "Performance-first products and processes designed for demanding Indian operating conditions.",
     points: [],
     reverse: true,
+    media: "from-tertiary/45 via-secondary/35 to-primary/20",
   },
   {
     title: "Trusted By",
@@ -28,14 +30,15 @@ const cards = [
       "Nationwide growth platform",
     ],
     reverse: false,
+    media: "from-primary/30 via-quinary/35 to-secondary/40",
   },
 ];
 ---
 
-<section class="section" id="about">
+<section class="section pt-24 md:pt-28" id="about">
   <div class="container">
     <div class="reveal">
-      <h2 class="text-center gradient-text text-[clamp(2rem,4vw,3.2rem)] mb-10">
+      <h2 class="text-center gradient-text text-[clamp(2.1rem,4.4vw,3.4rem)] mb-10">
         About Bi
         <br />
         <em>Group</em>
@@ -45,7 +48,9 @@ const cards = [
     <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
       {
         cards.map((card, i) => (
-          <div class={`reveal bg-light px-8 py-8 rounded-2xl flex flex-col gap-y-12 h-full card-shadow`}>
+          <div
+            class={`reveal reveal-delay-${(i % 3) + 1} bg-light px-8 py-8 rounded-2xl flex flex-col gap-y-12 h-full card-shadow`}
+          >
             <div class={`flex flex-col gap-y-5 ${card.reverse ? "order-2" : ""}`}>
               <h3 class="gradient-text text-[clamp(1.5rem,2.5vw,2rem)]">
                 {card.title}
@@ -71,15 +76,7 @@ const cards = [
               )}
             </div>
             <div class={`${card.reverse ? "order-1 mb-auto" : "mt-auto"}`}>
-              <div
-                class={`h-28 rounded-2xl ${
-                  i === 0
-                    ? "bg-gradient-to-br from-primary/20 to-secondary/30"
-                    : i === 1
-                      ? "bg-gradient-to-br from-tertiary/25 to-primary/15"
-                      : "bg-gradient-to-br from-secondary/40 to-primary/20"
-                }`}
-              />
+              <div class={`h-28 rounded-2xl bg-gradient-to-br ${card.media}`} />
             </div>
           </div>
         ))
