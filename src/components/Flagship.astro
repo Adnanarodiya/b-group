@@ -1,0 +1,101 @@
+---
+---
+
+<section class="flagship section" id="flagship">
+  <div class="flagship-shell">
+    <div class="flagship-media" aria-hidden="true">
+      <img
+        src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?auto=format&fit=crop&w=1600&q=80"
+        alt=""
+        width="1600"
+        height="1100"
+        loading="lazy"
+      />
+    </div>
+    <div class="flagship-content reveal">
+      <p class="section-label">Flagship Spotlight</p>
+      <h2 class="section-title">Bi Paints — protecting what India builds</h2>
+      <p class="section-lead">
+        High-performance industrial and protective coatings for infrastructure,
+        marine, energy, and demanding industrial environments.
+      </p>
+      <ul>
+        <li>Protective &amp; industrial coating systems</li>
+        <li>Marine, container, and heavy-duty applications</li>
+        <li>Color coating expertise for lasting finishes</li>
+        <li>Backed by a major manufacturing expansion roadmap</li>
+      </ul>
+      <a class="btn btn-primary" href="#contact">Request a consultation</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .flagship {
+    padding: 0;
+    background: var(--mist);
+  }
+
+  .flagship-shell {
+    display: grid;
+    min-height: min(78vh, 740px);
+  }
+
+  .flagship-media {
+    min-height: 280px;
+    overflow: hidden;
+  }
+
+  .flagship-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .flagship-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(2.5rem, 6vw, 4.5rem);
+    background:
+      linear-gradient(160deg, #ffffff 0%, #eef3fb 100%);
+  }
+
+  .flagship-content .section-title {
+    max-width: 14ch;
+  }
+
+  ul {
+    margin: 1.5rem 0 2rem;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  li {
+    position: relative;
+    padding-left: 1.2rem;
+    color: var(--ink-soft);
+  }
+
+  li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 0.45rem;
+    height: 0.45rem;
+    background: var(--gold);
+  }
+
+  @media (min-width: 920px) {
+    .flagship-shell {
+      grid-template-columns: 1.15fr 1fr;
+    }
+
+    .flagship-media {
+      min-height: 100%;
+    }
+  }
+</style>

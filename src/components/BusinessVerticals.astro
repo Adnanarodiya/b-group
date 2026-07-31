@@ -1,0 +1,152 @@
+---
+const verticals = [
+  {
+    name: "Bi Paints & Color Coating",
+    blurb: "Industrial, protective, marine, and decorative coating systems.",
+  },
+  {
+    name: "Bi Modular Kitchen",
+    blurb: "Designed storage and finishes for modern Indian homes.",
+  },
+  {
+    name: "Bi Agriculture",
+    blurb: "Solutions that support productivity across the farming value chain.",
+  },
+  {
+    name: "Bi Homeopathy",
+    blurb: "Trusted wellness products rooted in careful formulation.",
+  },
+  {
+    name: "Bi Clothes",
+    blurb: "Apparel crafted for everyday comfort and lasting wear.",
+  },
+  {
+    name: "Bi Electronics",
+    blurb: "Consumer electronics built around reliability and value.",
+  },
+  {
+    name: "Bi Air Conditioner",
+    blurb: "Cooling solutions engineered for Indian climates.",
+  },
+  {
+    name: "Bi Painting Solutions",
+    blurb: "End-to-end application support for projects large and small.",
+  },
+  {
+    name: "Bi Engineering",
+    blurb: "Technical capability for industrial and infrastructure needs.",
+  },
+  {
+    name: "Bi E-commerce",
+    blurb: "Digital storefronts connecting Bi brands to customers nationwide.",
+  },
+];
+---
+
+<section class="businesses section" id="businesses">
+  <div class="container">
+    <div class="intro reveal">
+      <p class="section-label">Our Business Verticals</p>
+      <h2 class="section-title">A portfolio built for India’s next decade</h2>
+      <p class="section-lead">
+        Ten complementary verticals — anchored by coatings expertise and extended
+        into homes, industry, and commerce.
+      </p>
+    </div>
+
+    <ul class="vertical-list">
+      {
+        verticals.map((item, index) => (
+          <li class={`vertical-item reveal reveal-delay-${(index % 3) + 1}`}>
+            <span class="index">{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <h3>{item.name}</h3>
+              <p>{item.blurb}</p>
+            </div>
+            <span class="arrow" aria-hidden="true">→</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .businesses {
+    background: var(--white);
+  }
+
+  .intro {
+    margin-bottom: 2.5rem;
+  }
+
+  .vertical-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .vertical-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    padding: 1.35rem 0.15rem;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.35s var(--ease), padding-left 0.35s var(--ease);
+  }
+
+  .vertical-item:hover {
+    background: linear-gradient(90deg, rgba(0, 45, 136, 0.04), transparent 60%);
+    padding-left: 0.55rem;
+  }
+
+  .index {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--blue);
+    font-size: 0.95rem;
+    padding-top: 0.2rem;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .vertical-item p {
+    color: var(--ink-soft);
+    font-size: 0.96rem;
+    max-width: 52ch;
+  }
+
+  .arrow {
+    color: var(--gold-deep);
+    font-size: 1.25rem;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition:
+      opacity 0.35s var(--ease),
+      transform 0.35s var(--ease);
+    padding-top: 0.15rem;
+  }
+
+  .vertical-item:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (min-width: 800px) {
+    .vertical-item {
+      grid-template-columns: 3.5rem 1fr auto;
+      gap: 1.5rem;
+      padding: 1.55rem 0.25rem;
+      align-items: center;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+    }
+  }
+</style>

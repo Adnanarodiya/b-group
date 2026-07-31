@@ -1,0 +1,186 @@
+---
+const columns = [
+  {
+    title: "Company",
+    links: [
+      { label: "About us", href: "#about" },
+      { label: "Businesses", href: "#businesses" },
+      { label: "Sustainability", href: "#why" },
+      { label: "Investors", href: "#cta" },
+      { label: "Career", href: "#contact" },
+    ],
+  },
+  {
+    title: "Explore",
+    links: [
+      { label: "Newsroom", href: "#flagship" },
+      { label: "Bi Foundation", href: "#why" },
+      { label: "E-Commerce", href: "#businesses" },
+      { label: "Bi Paints", href: "#flagship" },
+      { label: "Contact Us", href: "#contact" },
+    ],
+  },
+];
+---
+
+<footer class="site-footer" id="contact">
+  <div class="container footer-grid">
+    <div class="brand-block">
+      <img src="/logo-on-dark.svg" alt="BiGROUP" width="168" height="38" />
+      <p>
+        Diversified Indian conglomerate spanning coatings, engineering, home
+        solutions, agriculture, and digital commerce.
+      </p>
+      <div class="contact-lines">
+        <a href="mailto:hello@bigroup.in">hello@bigroup.in</a>
+        <span>India</span>
+      </div>
+    </div>
+
+    {
+      columns.map((column) => (
+        <div>
+          <h3>{column.title}</h3>
+          <ul>
+            {column.links.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+
+    <form class="contact-form" id="contact-form">
+      <h3>Contact Us</h3>
+      <label>
+        Name
+        <input type="text" name="name" autocomplete="name" required />
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" autocomplete="email" required />
+      </label>
+      <label>
+        Message
+        <textarea name="message" rows="3" required></textarea>
+      </label>
+      <button class="btn btn-primary" type="submit">Send message</button>
+    </form>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© {new Date().getFullYear()} BiGROUP. All rights reserved.</p>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("contact-form")?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>
+
+<style>
+  .site-footer {
+    background: var(--blue-deep);
+    color: rgba(255, 255, 255, 0.86);
+    padding: 4rem 0 1.5rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .brand-block p {
+    margin-top: 1rem;
+    max-width: 34ch;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .contact-lines {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 1.25rem;
+  }
+
+  .contact-lines a {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.78);
+    transition: color 0.25s var(--ease);
+  }
+
+  a:hover {
+    color: var(--gold);
+  }
+
+  .contact-form {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  label {
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--white);
+    border-radius: 2px;
+    padding: 0.75rem 0.85rem;
+    font: inherit;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-top: 1.25rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  @media (min-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1.4fr 0.8fr 0.8fr 1.3fr;
+      gap: 2rem;
+    }
+  }
+</style>
