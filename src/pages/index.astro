@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const businesses = [
+  'Paints & Color Coating', 'Modular Kitchen', 'Agriculture', 'Homeopathy', 'Clothes',
+  'Electronics', 'Air Conditioner', 'Painting Solutions', 'Engineering', 'E-commerce',
+];
+
+const clients = [
+  'AM/NS India', 'Larsen & Toubro', 'Godrej & Boyce', 'Ministry of Defence', 'Chowgule Group',
+  'ElectroMech', 'UNP Polyvalves', 'Lohr India', 'Marini Fayat Group', 'NAFTech',
+];
+---
+
+<BaseLayout>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="/" aria-label="Bi Group home"><span class="brand-mark"></span><span>BiGROUP</span></a>
+      <div class="nav-links">
+        <a href="#about">About us</a>
+        <a href="#businesses">Businesses</a>
+        <a href="#sustainability">Sustainability</a>
+        <a href="#investors">Investors</a>
+      </div>
+      <a class="nav-cta" href="#contact">Get in touch <span>↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-content">
+        <p class="eyebrow">An Indian business group</p>
+        <h1>Building the <em>everyday</em> into something extraordinary.</h1>
+        <p>We bring together ideas, people and purposeful businesses to create products that make life work better.</p>
+        <a class="button" href="#businesses">Explore our businesses <span>→</span></a>
+      </div>
+      <div class="hero-bottom">
+        <div class="scroll-note"><span></span> Scroll to discover</div>
+        <div class="hero-location">Made in India · Built for the world</div>
+      </div>
+    </section>
+
+    <section class="intro container" id="about">
+      <div class="intro-art">
+        <div class="intro-photo"></div>
+        <div class="intro-card"><b>10+</b><span>purpose-led businesses, one shared ambition.</span></div>
+      </div>
+      <div>
+        <p class="eyebrow">Who we are</p>
+        <h2 class="section-title">One group. Many possibilities.</h2>
+        <p class="section-copy">Bi Group is a diversified Indian enterprise with a simple belief: progress should reach everyone. Across industries, our teams combine practical knowledge with fresh thinking to deliver trusted solutions.</p>
+        <div class="intro-points">
+          <div><strong>Built on trust</strong><span>Partnerships that stand the test of time.</span></div>
+          <div><strong>Driven by purpose</strong><span>Growth with a positive impact.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="businesses" id="businesses">
+      <div class="container">
+        <div class="section-top">
+          <div><p class="eyebrow">What we do</p><h2 class="section-title">A portfolio made for real life.</h2></div>
+          <p class="section-copy">From surfaces to systems, our businesses meet the needs of homes, communities and industries.</p>
+        </div>
+        <div class="business-grid">
+          {businesses.map((business, index) => (
+            <a href="#contact" class="business-card">
+              <span>0{index + 1}</span><h3>Bi {business}</h3><i>↗</i>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container stats-inner">
+        <div class="stat-intro"><p class="eyebrow">At a glance</p><p>A growing group of companies with a shared commitment to quality, care and progress.</p></div>
+        <div class="stat"><strong>10+</strong><span>Business verticals</span></div>
+        <div class="stat"><strong>11</strong><span>Trusted industry clients</span></div>
+        <div class="stat"><strong>1</strong><span>Shared vision for a better tomorrow</span></div>
+      </div>
+    </section>
+
+    <section class="spotlight">
+      <div class="spotlight-content">
+        <p class="eyebrow">Flagship spotlight</p>
+        <h2 class="section-title">Colour that transforms every surface.</h2>
+        <p class="section-copy">Bi Paints & Color Coating combines performance, protection and a world of colour to help every space show its true character.</p>
+        <a class="text-link" href="#contact">Discover Bi Paints <span>→</span></a>
+      </div>
+      <div class="spotlight-image" role="img" aria-label="Colourful painted wall"></div>
+    </section>
+
+    <section class="trusted container" id="investors">
+      <div class="trusted-header">
+        <div><p class="eyebrow">Trusted by leaders</p><h2 class="section-title">Proud partners in progress.</h2></div>
+        <p class="section-copy">We work alongside organisations whose standards shape the industries they lead.</p>
+      </div>
+      <div class="client-list">
+        {clients.map((client) => <div class="client">{client}</div>)}
+      </div>
+    </section>
+
+    <section class="why" id="sustainability">
+      <div class="container why-grid">
+        <div><p class="eyebrow">Why Bi Group</p><h2 class="section-title">Progress is a collective effort.</h2><p class="section-copy">Our standards live in the choices we make every day—from the materials we source to the relationships we build.</p></div>
+        <div class="why-list">
+          <div class="why-item"><b>Quality without compromise</b><p>Solutions designed with diligence, tested for performance and made to last.</p></div>
+          <div class="why-item"><b>People at the centre</b><p>We invest in capable teams and meaningful relationships with our communities.</p></div>
+          <div class="why-item"><b>Responsible growth</b><p>We pursue opportunity with a considered approach to our planet and future.</p></div>
+          <div class="why-item"><b>One connected group</b><p>Shared values let each business move with focus while learning from the whole.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta-inner">
+        <div><p class="eyebrow">Let’s create what’s next</p><h2>Have a project, partnership or possibility in mind?</h2></div>
+        <a class="button" href="mailto:hello@bigroup.in">Start a conversation <span>→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div><a class="brand" href="/"><span class="brand-mark"></span><span>BiGROUP</span></a><p class="footer-about">A diversified Indian enterprise building better everyday experiences through purposeful businesses.</p></div>
+        <div><h4>Explore</h4><ul><li><a href="#about">About us</a></li><li><a href="#businesses">Businesses</a></li><li><a href="#sustainability">Sustainability</a></li></ul></div>
+        <div><h4>Connect</h4><ul><li><a href="#contact">Contact us</a></li><li><a href="#investors">Investors</a></li><li><a href="#contact">Careers</a></li></ul></div>
+        <div><h4>Follow our journey</h4><ul><li>LinkedIn</li><li>Instagram</li><li>Newsroom</li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© {new Date().getFullYear()} Bi Group. All rights reserved.</span><span>Privacy · Terms of use</span></div>
+    </div>
+  </footer>
+</BaseLayout>
