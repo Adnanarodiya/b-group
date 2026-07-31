@@ -1,0 +1,520 @@
+---
+import Icon from "./Icon.astro";
+import Logo from "./Logo.astro";
+import { nav, pages, site, verticals } from "../data/site";
+
+const utilityLinks = pages.filter((page) =>
+  ["Bi Foundation", "E-Commerce", "Investors"].includes(page.label),
+);
+const panelId = (label: string) => `panel-${label.toLowerCase().replace(/[^a-z]+/g, "-")}`;
+---
+
+<header
+  id="site-header"
+  data-state="top"
+  data-panel-open="false"
+  class="fixed inset-x-0 top-0 z-50"
+>
+  <!-- Utility strip: collapses away as soon as the page scrolls. -->
+  <div class="utility-strip border-b border-white/10 bg-navy-950 text-white">
+    <div class="container-page flex h-9 items-center justify-between gap-6 text-[0.7rem] tracking-wide">
+      <p class="hidden font-medium text-white/70 sm:block">{site.tagline}</p>
+      <div class="flex items-center gap-5 font-medium">
+        {
+          utilityLinks.map((link) => (
+            <a href={link.href} class="link-sweep text-white/75 transition-colors hover:text-white">
+              {link.label}
+            </a>
+          ))
+        }
+        <span class="hidden items-center gap-1.5 text-white/60 md:flex">
+          <Icon name="globe" class="size-3.5" strokeWidth={1.8} />
+          India — EN
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-bar">
+    <div class="container-page flex h-19 items-center justify-between gap-4">
+      <a href="/" class="shrink-0" aria-label={`${site.name} — home`}>
+        <span class="logo-light"><Logo variant="light" class="text-[1.6rem] md:text-[1.75rem]" /></span>
+        <span class="logo-navy"><Logo variant="navy" class="text-[1.6rem] md:text-[1.75rem]" /></span>
+      </a>
+
+      <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary" data-nav>
+        {
+          nav.map((item) =>
+            item.mega || item.children ? (
+              <div class="nav-item">
+                <button
+                  type="button"
+                  class="link-sweep nav-link flex items-center gap-1.5"
+                  aria-expanded="false"
+                  aria-controls={panelId(item.label)}
+                  data-trigger={panelId(item.label)}
+                >
+                  {item.label}
+                  <Icon name="chevron" class="size-3.5 transition-transform duration-300" strokeWidth={2.2} />
+                </button>
+              </div>
+            ) : (
+              <a href={item.href} class="link-sweep nav-link">
+                {item.label}
+              </a>
+            ),
+          )
+        }
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="/contact" class="btn btn-primary hidden !px-5 !py-2.5 !text-sm sm:inline-flex">
+          Contact Us
+          <Icon name="arrow-right" class="size-4" strokeWidth={2} />
+        </a>
+        <button
+          type="button"
+          class="nav-link inline-flex items-center gap-2 rounded-full border border-current/25 px-3 py-2 text-sm font-semibold lg:hidden"
+          data-menu-toggle
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <Icon name="menu" class="size-5" strokeWidth={2} />
+          <span class="sr-only">Open menu</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop dropdown / mega panels -->
+  {
+    nav
+      .filter((item) => item.mega || item.children)
+      .map((item) => (
+        <div class="nav-panel" id={panelId(item.label)} data-panel hidden>
+          {item.mega ? (
+            <div class="container-page grid gap-10 py-10 lg:grid-cols-[0.85fr_1.6fr] lg:py-12">
+              <div class="panel-stagger flex flex-col justify-between gap-6 border-navy-100 lg:border-r lg:pr-10">
+                <div>
+                  <p class="eyebrow text-signal-600">Businesses</p>
+                  <h2 class="mt-3 text-2xl font-extrabold text-navy-800">{item.mega.intro.title}</h2>
+                  <p class="mt-3 max-w-sm text-sm leading-relaxed text-navy-800/70">
+                    {item.mega.intro.text}
+                  </p>
+                </div>
+                <a href={item.mega.intro.cta.href} class="btn btn-navy self-start !py-2.5 !text-sm">
+                  {item.mega.intro.cta.label}
+                  <Icon name="arrow-right" class="size-4" strokeWidth={2} />
+                </a>
+              </div>
+              <ul class="panel-stagger grid gap-x-8 gap-y-1 sm:grid-cols-2">
+                {verticals.map((vertical) => (
+                  <li>
+                    <a
+                      href={vertical.href}
+                      class="group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors duration-300 hover:bg-mist"
+                    >
+                      <span
+                        class="flex size-9 shrink-0 items-center justify-center rounded-lg transition-transform duration-500 group-hover:scale-110"
+                        style={`background:${vertical.accent}14;color:${vertical.accent}`}
+                      >
+                        <Icon name={vertical.icon as any} class="size-5" strokeWidth={1.7} />
+                      </span>
+                      <span class="min-w-0">
+                        <span class="block truncate text-sm font-semibold text-navy-800">
+                          {vertical.name}
+                        </span>
+                        <span class="block truncate text-xs text-navy-800/55">
+                          {vertical.highlights.join(" · ")}
+                        </span>
+                      </span>
+                      <Icon
+                        name="arrow-right"
+                        class="ml-auto size-4 shrink-0 -translate-x-1 text-navy-400 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                        strokeWidth={2}
+                      />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div class="container-page py-8">
+              <ul class="panel-stagger grid gap-1 sm:max-w-md">
+                <li>
+                  <a
+                    href={item.href}
+                    class="group flex items-center justify-between gap-4 rounded-xl px-3 py-2.5 text-sm font-semibold text-navy-800 transition-colors duration-300 hover:bg-mist"
+                  >
+                    {item.label} overview
+                    <Icon
+                      name="arrow-right"
+                      class="size-4 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                      strokeWidth={2}
+                    />
+                  </a>
+                </li>
+                {item.children?.map((child) => (
+                  <li>
+                    <a
+                      href={child.href}
+                      class="group flex items-center justify-between gap-4 rounded-xl px-3 py-2.5 text-sm text-navy-800/70 transition-colors duration-300 hover:bg-mist hover:text-navy-800"
+                    >
+                      {child.label}
+                      <Icon
+                        name="arrow-right"
+                        class="size-4 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                        strokeWidth={2}
+                      />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      ))
+  }
+</header>
+
+<!-- Mobile drawer -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-60 hidden lg:hidden"
+  data-mobile-menu
+  aria-hidden="true"
+>
+  <div class="absolute inset-0 bg-navy-950/60 backdrop-blur-sm" data-menu-close></div>
+  <div
+    class="drawer absolute inset-y-0 right-0 flex w-full max-w-sm flex-col bg-white shadow-2xl"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Site menu"
+  >
+    <div class="flex items-center justify-between border-b border-navy-100 px-5 py-4">
+      <Logo variant="navy" class="text-2xl" />
+      <button
+        type="button"
+        class="rounded-full p-2 text-navy-800 transition-colors hover:bg-mist"
+        data-menu-close
+      >
+        <Icon name="close" class="size-5" strokeWidth={2} />
+        <span class="sr-only">Close menu</span>
+      </button>
+    </div>
+
+    <nav class="flex-1 overflow-y-auto px-5 py-4" aria-label="Mobile">
+      <ul class="divide-y divide-navy-100">
+        <li>
+          <details class="group py-1">
+            <summary
+              class="flex cursor-pointer list-none items-center justify-between py-3 font-display text-base font-bold text-navy-800"
+            >
+              Businesses
+              <Icon
+                name="chevron"
+                class="size-4 transition-transform duration-300 group-open:rotate-180"
+                strokeWidth={2.2}
+              />
+            </summary>
+            <ul class="pb-2">
+              {
+                verticals.map((vertical) => (
+                  <li>
+                    <a
+                      href={vertical.href}
+                      class="flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-navy-800/75"
+                    >
+                      <span class="size-2 rounded-full" style={`background:${vertical.accent}`}></span>
+                      {vertical.name}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
+        </li>
+        {
+          pages
+            .filter((page) => !["Home", "Businesses"].includes(page.label))
+            .map((page) => (
+              <li>
+                <a
+                  href={page.href}
+                  class="flex items-center justify-between py-4 font-display text-base font-bold text-navy-800"
+                >
+                  {page.label}
+                  <Icon name="arrow-right" class="size-4 text-navy-300" strokeWidth={2} />
+                </a>
+              </li>
+            ))
+        }
+      </ul>
+    </nav>
+
+    <div class="space-y-3 border-t border-navy-100 px-5 py-5">
+      <a href="/contact" class="btn btn-primary w-full">Talk to Bi Group</a>
+      <a
+        href={site.contact.phoneHref}
+        class="flex items-center justify-center gap-2 text-sm font-semibold text-navy-800/70"
+      >
+        <Icon name="phone" class="size-4" strokeWidth={1.8} />
+        {site.contact.phone}
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  #site-header {
+    --nav-fg: white;
+    transition: background-color 0.5s var(--ease-brand), box-shadow 0.5s var(--ease-brand);
+  }
+
+  .main-bar {
+    transition: background-color 0.5s var(--ease-brand), border-color 0.5s var(--ease-brand);
+    border-bottom: 1px solid transparent;
+  }
+
+  .utility-strip {
+    overflow: hidden;
+    transition: height 0.5s var(--ease-brand), opacity 0.35s var(--ease-brand);
+  }
+
+  .nav-link {
+    color: var(--nav-fg);
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    transition: color 0.4s var(--ease-brand), opacity 0.4s var(--ease-brand);
+    cursor: pointer;
+  }
+
+  .logo-navy {
+    display: none;
+  }
+
+  /* Solid state — applied on scroll and whenever a panel is open. */
+  #site-header[data-state="scrolled"],
+  #site-header[data-panel-open="true"] {
+    --nav-fg: var(--color-navy-800);
+  }
+
+  #site-header[data-state="scrolled"] .main-bar,
+  #site-header[data-panel-open="true"] .main-bar {
+    background-color: rgb(255 255 255 / 0.92);
+    backdrop-filter: blur(14px) saturate(150%);
+    border-bottom-color: var(--color-navy-100);
+  }
+
+  #site-header[data-state="scrolled"] .logo-light,
+  #site-header[data-panel-open="true"] .logo-light {
+    display: none;
+  }
+
+  #site-header[data-state="scrolled"] .logo-navy,
+  #site-header[data-panel-open="true"] .logo-navy {
+    display: block;
+  }
+
+  #site-header[data-state="scrolled"] .utility-strip {
+    height: 0;
+    opacity: 0;
+  }
+
+  #site-header[data-panel-open="true"] {
+    box-shadow: var(--shadow-lift);
+  }
+
+  button[aria-expanded="true"] > :global(svg) {
+    transform: rotate(180deg);
+  }
+
+  /* Panels */
+  .nav-panel {
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    background: white;
+    border-top: 1px solid var(--color-navy-100);
+    opacity: 0;
+    transform: translateY(-0.75rem);
+    pointer-events: none;
+    transition:
+      opacity 0.4s var(--ease-brand),
+      transform 0.5s var(--ease-brand);
+  }
+
+  .nav-panel[data-open] {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Staggered entrance for the panel contents, Jotun-style. */
+  .panel-stagger > * {
+    opacity: 0;
+    transform: translateY(0.6rem);
+    transition:
+      opacity 0.5s var(--ease-brand),
+      transform 0.5s var(--ease-brand);
+  }
+
+  .nav-panel[data-open] .panel-stagger > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav-panel[data-open] .panel-stagger > *:nth-child(1) {
+    transition-delay: 60ms;
+  }
+  .nav-panel[data-open] .panel-stagger > *:nth-child(2) {
+    transition-delay: 100ms;
+  }
+  .nav-panel[data-open] .panel-stagger > *:nth-child(3) {
+    transition-delay: 140ms;
+  }
+  .nav-panel[data-open] .panel-stagger > *:nth-child(4) {
+    transition-delay: 180ms;
+  }
+  .nav-panel[data-open] .panel-stagger > *:nth-child(5) {
+    transition-delay: 220ms;
+  }
+  .nav-panel[data-open] .panel-stagger > *:nth-child(n + 6) {
+    transition-delay: 260ms;
+  }
+
+  /* Mobile drawer */
+  [data-mobile-menu] > div:first-child {
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-brand);
+  }
+
+  [data-mobile-menu] .drawer {
+    transform: translateX(100%);
+    transition: transform 0.5s var(--ease-brand);
+  }
+
+  [data-mobile-menu][data-open] > div:first-child {
+    opacity: 1;
+  }
+
+  [data-mobile-menu][data-open] .drawer {
+    transform: none;
+  }
+
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+</style>
+
+<script>
+  const header = document.getElementById("site-header");
+  if (header) {
+    const triggers = Array.from(header.querySelectorAll<HTMLButtonElement>("[data-trigger]"));
+    const panels = Array.from(header.querySelectorAll<HTMLElement>("[data-panel]"));
+    let openId: string | null = null;
+    let closeTimer: number | undefined;
+
+    const setPanel = (id: string | null) => {
+      if (openId === id) return;
+      openId = id;
+      panels.forEach((panel) => {
+        const isOpen = panel.id === id;
+        if (isOpen) {
+          panel.hidden = false;
+          // Let the browser register the un-hidden element before transitioning.
+          requestAnimationFrame(() => panel.setAttribute("data-open", ""));
+        } else if (panel.hasAttribute("data-open")) {
+          panel.removeAttribute("data-open");
+          const hide = () => {
+            if (!panel.hasAttribute("data-open")) panel.hidden = true;
+          };
+          window.setTimeout(hide, 420);
+        }
+      });
+      triggers.forEach((trigger) => {
+        trigger.setAttribute("aria-expanded", String(trigger.dataset.trigger === id));
+      });
+      header.dataset.panelOpen = String(Boolean(id));
+    };
+
+    const scheduleClose = () => {
+      window.clearTimeout(closeTimer);
+      closeTimer = window.setTimeout(() => setPanel(null), 180);
+    };
+    const cancelClose = () => window.clearTimeout(closeTimer);
+
+    triggers.forEach((trigger) => {
+      const id = trigger.dataset.trigger!;
+      trigger.addEventListener("click", () => setPanel(openId === id ? null : id));
+      trigger.addEventListener("mouseenter", () => {
+        cancelClose();
+        setPanel(id);
+      });
+      trigger.addEventListener("focus", () => {
+        cancelClose();
+        setPanel(id);
+      });
+    });
+
+    header.querySelectorAll<HTMLElement>("[data-nav] > *").forEach((item) => {
+      item.addEventListener("mouseenter", () => {
+        if (!item.querySelector("[data-trigger]")) scheduleClose();
+      });
+    });
+
+    panels.forEach((panel) => {
+      panel.addEventListener("mouseenter", cancelClose);
+      panel.addEventListener("mouseleave", scheduleClose);
+    });
+
+    header.addEventListener("mouseleave", scheduleClose);
+    header.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && openId) {
+        const active = triggers.find((t) => t.dataset.trigger === openId);
+        setPanel(null);
+        active?.focus();
+      }
+    });
+    header.addEventListener("focusout", (event) => {
+      if (!header.contains(event.relatedTarget as Node)) setPanel(null);
+    });
+
+    // Solid header once the hero starts scrolling away.
+    const syncState = () => {
+      header.dataset.state = window.scrollY > 24 ? "scrolled" : "top";
+    };
+    syncState();
+    window.addEventListener("scroll", syncState, { passive: true });
+  }
+
+  const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
+  const menuToggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  if (menu && menuToggle) {
+    const openMenu = () => {
+      menu.hidden = false;
+      menu.classList.remove("hidden");
+      menu.setAttribute("aria-hidden", "false");
+      requestAnimationFrame(() => menu.setAttribute("data-open", ""));
+      menuToggle.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+      menu.querySelector<HTMLElement>("[data-menu-close]")?.focus();
+    };
+    const closeMenu = () => {
+      menu.removeAttribute("data-open");
+      menu.setAttribute("aria-hidden", "true");
+      menuToggle.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+      window.setTimeout(() => menu.classList.add("hidden"), 480);
+      menuToggle.focus();
+    };
+
+    menuToggle.addEventListener("click", openMenu);
+    menu.querySelectorAll("[data-menu-close]").forEach((el) => el.addEventListener("click", closeMenu));
+    menu.querySelectorAll("a").forEach((el) => el.addEventListener("click", closeMenu));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menu.hasAttribute("data-open")) closeMenu();
+    });
+  }
+</script>

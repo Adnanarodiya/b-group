@@ -1,0 +1,244 @@
+---
+import Icon from "./Icon.astro";
+import { site, verticals } from "../data/site";
+
+const details = [
+  { icon: "phone", label: site.contact.phone, href: site.contact.phoneHref },
+  { icon: "mail", label: site.contact.email, href: `mailto:${site.contact.email}` },
+  { icon: "pin", label: site.contact.address },
+  { icon: "clock", label: site.contact.hours },
+] as const;
+---
+
+<section id="contact" class="relative bg-mist py-24 lg:py-32">
+  <div class="container-page">
+    <div
+      class="grid overflow-hidden rounded-3xl bg-white shadow-lift lg:grid-cols-[0.85fr_1.15fr]"
+      data-reveal="scale"
+    >
+      <!-- Contact promise -->
+      <div class="relative isolate overflow-hidden bg-navy-800 p-8 text-white lg:p-12">
+        <div class="absolute inset-0 -z-10 bg-[radial-gradient(120%_120%_at_0%_0%,#22409f_0%,#0b1c4d_55%,#071335_100%)]"></div>
+        <div
+          class="absolute -bottom-24 -left-16 -z-10 size-72 rounded-full bg-signal-500/20 blur-[90px] animate-float-slow"
+        >
+        </div>
+        <div class="grain -z-10"></div>
+
+        <p class="eyebrow text-signal-500">Let's talk</p>
+        <h2 class="mt-5 text-[clamp(1.85rem,3.4vw,2.75rem)] leading-[1.08] font-extrabold">
+          Tell us what you need protected, built or delivered.
+        </h2>
+        <p class="mt-5 text-sm leading-relaxed text-white/70 lg:text-base">
+          Share the site, the substrate or the shortlist. A specialist from the relevant business
+          replies with a specification, a sample or a quotation — not a brochure.
+        </p>
+
+        <ul class="mt-10 space-y-4">
+          {
+            details.map((detail) => (
+              <li class="flex items-start gap-3 text-sm">
+                <span class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-white/10 text-signal-500">
+                  <Icon name={detail.icon as any} class="size-4.5" strokeWidth={1.8} />
+                </span>
+                {"href" in detail && detail.href ? (
+                  <a href={detail.href} class="link-sweep mt-2 font-medium text-white/85">
+                    {detail.label}
+                  </a>
+                ) : (
+                  <span class="mt-2 font-medium text-white/70">{detail.label}</span>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+
+        <p class="mt-10 border-t border-white/15 pt-6 text-xs leading-relaxed text-white/50">
+          Trade enquiries, dealership applications and project tenders are all handled by the same
+          desk — {site.contact.salesEmail}.
+        </p>
+      </div>
+
+      <!-- Enquiry form -->
+      <div class="p-8 lg:p-12">
+        <form
+          id="enquiry-form"
+          class="space-y-5"
+          data-endpoint=""
+          method="post"
+          aria-describedby="enquiry-note"
+        >
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required placeholder="Your name" />
+            </div>
+            <div class="field">
+              <label for="company">Company</label>
+              <input
+                id="company"
+                name="company"
+                type="text"
+                autocomplete="organization"
+                placeholder="Organisation"
+              />
+            </div>
+            <div class="field">
+              <label for="email">Work email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                placeholder="you@company.com"
+              />
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+91" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="interest">I'm interested in</label>
+            <div class="relative">
+              <select id="interest" name="interest" required>
+                <option value="" selected disabled>Select a business</option>
+                {verticals.map((vertical) => <option value={vertical.name}>{vertical.name}</option>)}
+                <option value="Group / multiple businesses">Group / multiple businesses</option>
+                <option value="Dealership or distribution">Dealership or distribution</option>
+                <option value="Careers">Careers</option>
+              </select>
+              <Icon
+                name="chevron"
+                class="pointer-events-none absolute top-1/2 right-4 size-4 -translate-y-1/2 text-navy-400"
+                strokeWidth={2}
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="message">How can we help?</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              required
+              placeholder="Substrate, site location, quantities, timelines…"></textarea>
+          </div>
+
+          <label class="flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-navy-900/60">
+            <input type="checkbox" name="consent" required class="mt-0.5 size-4 accent-navy-600" />
+            I agree that Bi Group may contact me about this enquiry.
+          </label>
+
+          <div class="flex flex-wrap items-center gap-4 pt-1">
+            <button type="submit" class="btn btn-primary">
+              Send enquiry
+              <Icon name="arrow-right" class="size-4" strokeWidth={2} />
+            </button>
+            <p id="enquiry-note" class="text-xs text-navy-900/45">
+              We reply within one working day.
+            </p>
+          </div>
+        </form>
+
+        <div
+          id="enquiry-success"
+          class="hidden rounded-2xl border border-navy-100 bg-mist p-8 text-center"
+          role="status"
+        >
+          <span class="mx-auto flex size-12 items-center justify-center rounded-full bg-signal-500 text-navy-900">
+            <Icon name="check" class="size-6" strokeWidth={2.5} />
+          </span>
+          <h3 class="mt-5 font-display text-xl font-bold text-navy-800">Enquiry noted</h3>
+          <p class="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-navy-900/65">
+            Thank you — the relevant Bi Group business will get back to you. For anything urgent,
+            call
+            <a href={site.contact.phoneHref} class="font-semibold text-navy-600 underline">
+              {site.contact.phone}
+            </a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .field label {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--color-navy-900) 65%, white);
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    border: 1px solid var(--color-navy-100);
+    border-radius: 0.875rem;
+    background: var(--color-mist);
+    padding: 0.8rem 1rem;
+    font-size: 0.9375rem;
+    color: var(--color-navy-900);
+    transition:
+      border-color 0.35s var(--ease-brand),
+      background-color 0.35s var(--ease-brand),
+      box-shadow 0.35s var(--ease-brand);
+  }
+
+  .field select {
+    appearance: none;
+    padding-right: 2.75rem;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 7rem;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: color-mix(in oklab, var(--color-navy-900) 35%, white);
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    background: white;
+    border-color: var(--color-navy-400);
+    box-shadow: 0 0 0 4px rgb(34 64 159 / 0.1);
+    outline: none;
+  }
+</style>
+
+<script>
+  const form = document.getElementById("enquiry-form") as HTMLFormElement | null;
+  const success = document.getElementById("enquiry-success");
+
+  form?.addEventListener("submit", (event) => {
+    const endpoint = form.dataset.endpoint;
+    // Until a CRM / form endpoint is wired up via data-endpoint, confirm in place
+    // instead of navigating away.
+    if (endpoint) {
+      form.action = endpoint;
+      return;
+    }
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    form.classList.add("hidden");
+    success?.classList.remove("hidden");
+    success?.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+</script>

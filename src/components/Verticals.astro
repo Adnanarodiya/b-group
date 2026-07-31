@@ -1,0 +1,133 @@
+---
+import Icon from "./Icon.astro";
+import { verticals } from "../data/site";
+---
+
+<section id="businesses" class="relative bg-mist py-24 lg:py-32">
+  <div class="container-page">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <div class="max-w-2xl">
+        <p class="eyebrow text-signal-600" data-reveal>Our business verticals</p>
+        <h2
+          class="mt-5 text-[clamp(2rem,4.2vw,3.25rem)] leading-[1.05] font-extrabold text-navy-800"
+          data-reveal
+          style="--reveal-delay:60ms"
+        >
+          Ten verticals. One group standard.
+        </h2>
+        <p class="mt-5 text-base leading-relaxed text-navy-900/65 lg:text-lg" data-reveal style="--reveal-delay:120ms">
+          Industrial coatings, home interiors, agriculture, wellness, apparel, electronics, cooling,
+          application services, engineering and e-commerce — all under one accountable roof.
+        </p>
+      </div>
+      <a
+        href="/businesses"
+        class="btn btn-navy shrink-0 self-start lg:self-auto"
+        data-reveal
+        style="--reveal-delay:180ms"
+      >
+        All businesses
+        <Icon name="arrow-right" class="size-4" strokeWidth={2} />
+      </a>
+    </div>
+
+    <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        verticals.map((vertical, index) => (
+          <li
+            class:list={["group/card", vertical.flagship && "lg:col-span-2"]}
+            data-reveal
+            style={`--accent:${vertical.accent};--reveal-delay:${Math.min(index, 6) * 70}ms`}
+          >
+            <a
+              href={vertical.href}
+              class="vertical-card relative flex h-full flex-col overflow-hidden rounded-2xl border border-navy-100 bg-white p-6 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift lg:p-7"
+            >
+              <span class="card-wash"></span>
+
+              <div class="relative flex items-start justify-between gap-4">
+                <span class="icon-chip flex size-12 items-center justify-center rounded-xl transition-transform duration-500 group-hover/card:scale-110">
+                  <Icon name={vertical.icon as any} class="size-6" strokeWidth={1.7} />
+                </span>
+                {vertical.flagship && (
+                  <span class="rounded-full bg-signal-500 px-3 py-1 font-display text-[0.65rem] font-bold tracking-[0.14em] text-navy-900 uppercase">
+                    Flagship
+                  </span>
+                )}
+              </div>
+
+              <h3 class="relative mt-5 font-display text-xl leading-tight font-bold text-navy-800">
+                {vertical.name}
+              </h3>
+              <p class="relative mt-3 max-w-md text-sm leading-relaxed text-navy-900/65">
+                {vertical.summary}
+              </p>
+
+              <div class="relative mt-6 flex flex-wrap items-center gap-2 pt-1">
+                {vertical.highlights.map((tag) => (
+                  <span class="tag rounded-full border px-2.5 py-1 text-[0.7rem] font-semibold">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <span class="relative mt-auto flex items-center gap-2 pt-7 font-display text-sm font-bold text-navy-600">
+                Explore
+                <Icon
+                  name="arrow-right"
+                  class="size-4 transition-transform duration-500 group-hover/card:translate-x-1.5"
+                  strokeWidth={2}
+                />
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .vertical-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-wash {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(150deg, color-mix(in oklab, var(--accent) 12%, transparent), transparent 62%);
+    opacity: 0;
+    transition: opacity 0.55s var(--ease-brand);
+  }
+
+  .group\/card:hover .card-wash {
+    opacity: 1;
+  }
+
+  .icon-chip {
+    background: color-mix(in oklab, var(--accent) 12%, white);
+    color: var(--accent);
+  }
+
+  .tag {
+    border-color: color-mix(in oklab, var(--accent) 28%, white);
+    color: color-mix(in oklab, var(--accent) 80%, black 8%);
+    background: color-mix(in oklab, var(--accent) 6%, white);
+  }
+
+  .vertical-card::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.6s var(--ease-brand);
+  }
+
+  .group\/card:hover .vertical-card::after {
+    transform: scaleX(1);
+  }
+</style>

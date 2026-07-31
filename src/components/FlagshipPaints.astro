@@ -1,0 +1,190 @@
+---
+import Icon from "./Icon.astro";
+import { paintRange, swatches } from "../data/site";
+
+const initial = swatches[0];
+---
+
+<section id="bi-paints" class="relative overflow-hidden bg-white py-24 lg:py-32">
+  <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-mist to-transparent"></div>
+
+  <div class="container-page relative grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+    <!-- Interactive colour wall -->
+    <div class="order-2 lg:order-1" data-reveal="left">
+      <div
+        id="paint-wall"
+        class="wall relative overflow-hidden rounded-3xl border border-navy-100 shadow-lift"
+        style={`--wall:${initial.hex}`}
+      >
+        <div class="wall__paint">
+          <div class="wall__light"></div>
+          <div class="wall__frame"></div>
+          <div class="grain"></div>
+        </div>
+        <div class="wall__skirting"></div>
+
+        <div
+          class="absolute top-5 left-5 rounded-xl bg-white/92 px-4 py-3 shadow-card backdrop-blur-sm"
+        >
+          <p class="font-display text-sm font-bold text-navy-800" data-swatch-name>{initial.name}</p>
+          <p class="mt-0.5 text-xs font-medium text-navy-900/55">
+            <span data-swatch-code>{initial.code}</span>
+            <span class="mx-1.5 text-navy-200">•</span>
+            <span data-swatch-hex>{initial.hex.toUpperCase()}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <p class="text-[0.7rem] font-semibold tracking-[0.18em] text-navy-900/45 uppercase">
+          Try the shade card
+        </p>
+        <div class="mt-3 flex flex-wrap gap-2.5" role="group" aria-label="Bi Paints shade card">
+          {
+            swatches.map((swatch, index) => (
+              <button
+                type="button"
+                class="swatch group/sw relative size-12 rounded-xl border border-black/5 transition-transform duration-400 hover:-translate-y-1 focus-visible:-translate-y-1"
+                style={`background:${swatch.hex}`}
+                data-swatch
+                data-hex={swatch.hex}
+                data-name={swatch.name}
+                data-code={swatch.code}
+                aria-pressed={index === 0 ? "true" : "false"}
+              >
+                <span class="sr-only">{`${swatch.name} (${swatch.code})`}</span>
+                <span class="swatch__ring"></span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="order-1 lg:order-2">
+      <p class="eyebrow text-signal-600" data-reveal>Flagship spotlight</p>
+      <h2
+        class="mt-5 text-[clamp(2rem,4.2vw,3.25rem)] leading-[1.05] font-extrabold text-navy-800"
+        data-reveal
+        style="--reveal-delay:60ms"
+      >
+        Bi Paints &amp; Color Coating
+      </h2>
+      <p
+        class="mt-6 max-w-xl text-base leading-relaxed text-navy-900/70 lg:text-lg"
+        data-reveal
+        style="--reveal-delay:120ms"
+      >
+        The business the group was built on. Decorative shades for homes, protective systems for
+        plants and structures, and pre-painted coil lines for roofing and appliances — formulated
+        in-house and tested against Indian coastal salt, monsoon humidity and 45 °C summers.
+      </p>
+
+      <ul class="mt-10 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+        {
+          paintRange.map((item, index) => (
+            <li class="flex gap-3" data-reveal style={`--reveal-delay:${index * 70}ms`}>
+              <span class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-navy-600 text-white">
+                <Icon name="check" class="size-3" strokeWidth={3} />
+              </span>
+              <div>
+                <p class="font-display text-sm font-bold text-navy-800">{item.name}</p>
+                <p class="mt-1 text-sm leading-relaxed text-navy-900/60">{item.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-10 flex flex-wrap items-center gap-3" data-reveal style="--reveal-delay:200ms">
+        <a href="/businesses/paints" class="btn btn-navy">
+          Explore Bi Paints
+          <Icon name="arrow-right" class="size-4" strokeWidth={2} />
+        </a>
+        <a href="#contact" class="btn btn-ghost text-navy-800">Request a specification</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .wall {
+    aspect-ratio: 4 / 3;
+    background: white;
+  }
+
+  .wall__paint {
+    position: absolute;
+    inset: 0 0 12% 0;
+    background: var(--wall);
+    transition: background-color 0.8s var(--ease-brand);
+  }
+
+  /* Soft daylight falloff so the painted panel reads as a surface, not a block. */
+  .wall__light {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(70% 60% at 78% 12%, rgb(255 255 255 / 0.32), transparent 60%),
+      linear-gradient(200deg, rgb(255 255 255 / 0.14), transparent 45%, rgb(0 0 0 / 0.22));
+  }
+
+  .wall__frame {
+    position: absolute;
+    right: 8%;
+    bottom: 0;
+    top: 16%;
+    width: 26%;
+    border-radius: 0.75rem 0.75rem 0 0;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.16), rgb(255 255 255 / 0.04));
+    border: 1px solid rgb(255 255 255 / 0.25);
+    border-bottom: none;
+    backdrop-filter: blur(2px);
+  }
+
+  .wall__skirting {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 12%;
+    background: linear-gradient(180deg, #f3f1ec, #e2ded6);
+    border-top: 1px solid rgb(0 0 0 / 0.06);
+  }
+
+  .swatch__ring {
+    position: absolute;
+    inset: -0.3rem;
+    border-radius: 0.9rem;
+    border: 2px solid var(--color-navy-800);
+    opacity: 0;
+    transform: scale(0.9);
+    transition:
+      opacity 0.4s var(--ease-brand),
+      transform 0.4s var(--ease-brand);
+  }
+
+  .swatch[aria-pressed="true"] .swatch__ring {
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>
+
+<script>
+  const wall = document.getElementById("paint-wall");
+  const swatchButtons = document.querySelectorAll<HTMLButtonElement>("[data-swatch]");
+  const nameEl = document.querySelector<HTMLElement>("[data-swatch-name]");
+  const codeEl = document.querySelector<HTMLElement>("[data-swatch-code]");
+  const hexEl = document.querySelector<HTMLElement>("[data-swatch-hex]");
+
+  swatchButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const { hex = "", name = "", code = "" } = button.dataset;
+      wall?.style.setProperty("--wall", hex);
+      if (nameEl) nameEl.textContent = name;
+      if (codeEl) codeEl.textContent = code;
+      if (hexEl) hexEl.textContent = hex.toUpperCase();
+      swatchButtons.forEach((other) =>
+        other.setAttribute("aria-pressed", String(other === button)),
+      );
+    });
+  });
+</script>

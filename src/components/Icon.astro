@@ -1,0 +1,85 @@
+---
+/**
+ * Inline stroke-icon set. Keeping the paths local avoids an icon dependency and
+ * lets every glyph inherit `currentColor` and the surrounding font size.
+ */
+export type IconName =
+  | "paint"
+  | "kitchen"
+  | "agriculture"
+  | "wellness"
+  | "apparel"
+  | "electronics"
+  | "cooling"
+  | "roller"
+  | "engineering"
+  | "ecommerce"
+  | "layers"
+  | "shield"
+  | "factory"
+  | "sun"
+  | "handshake"
+  | "arrow-right"
+  | "arrow-down"
+  | "chevron"
+  | "check"
+  | "phone"
+  | "mail"
+  | "pin"
+  | "clock"
+  | "menu"
+  | "close"
+  | "search"
+  | "globe";
+
+interface Props {
+  name: IconName;
+  class?: string;
+  strokeWidth?: number;
+}
+
+const { name, class: className = "size-6", strokeWidth = 1.6 } = Astro.props;
+
+const paths: Record<IconName, string> = {
+  paint: `<path d="M5 4.5h11.5a2.5 2.5 0 0 1 0 5H8.5A2.5 2.5 0 0 0 6 12v1.5h6"/><path d="M11 13v3.5a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5V13z"/><path d="M13 20.5v-2.5"/>`,
+  kitchen: `<path d="M3.5 4.5h17v15h-17z"/><path d="M3.5 11.5h17"/><path d="M9 7.5h3"/><path d="M9 15.5h3"/>`,
+  agriculture: `<path d="M12 20.5V11"/><path d="M12 11c0-3.6 2.3-6.5 6.5-7-.3 4.6-2.8 7-6.5 7Z"/><path d="M12 14c-3.3 0-5.6-2-6-5.5 3.6.4 5.6 2.4 6 5.5Z"/>`,
+  wellness: `<path d="M12 20.5c-3.6-2.4-7-5.2-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11.5c0 3.8-3.4 6.6-7 9Z"/><path d="M9.5 12h5"/><path d="M12 9.5v5"/>`,
+  apparel: `<path d="M9 3.5 12 6l3-2.5 5 2.7-1.6 4L17 9.5v11H7v-11l-1.4.7L4 6.2z"/>`,
+  electronics: `<path d="M4.5 5.5h15v10h-15z"/><path d="M8 19.5h8"/><path d="M12 15.5v4"/>`,
+  cooling: `<path d="M3.5 5.5h17v7h-17z"/><path d="M7 16v2.5"/><path d="M12 16v3.5"/><path d="M17 16v2.5"/><path d="M6.5 9h11"/>`,
+  roller: `<path d="M4.5 4.5h12v4h-12z"/><path d="M10.5 8.5v2.5h6.5a2 2 0 0 1 2 2v1"/><path d="M17.5 14.5h4v5.5h-4z"/>`,
+  engineering: `<path d="m14.5 6.5 3 3-8 8-3-3z"/><path d="m17.5 9.5 2.2-2.2a2.5 2.5 0 0 0-3.5-3.5L14 6"/><path d="m6.5 14.5-2.2 2.2a2.5 2.5 0 0 0 3.5 3.5L10 18"/>`,
+  ecommerce: `<path d="M4 5.5h2.5l2 9.5h9l2-7H8"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/>`,
+  layers: `<path d="m12 3.5 8.5 4.5-8.5 4.5L3.5 8z"/><path d="m3.5 13 8.5 4.5 8.5-4.5"/>`,
+  shield: `<path d="M12 3.5 19.5 6v6c0 4.2-3.2 7-7.5 8.5C7.7 19 4.5 16.2 4.5 12V6z"/><path d="m9 12 2.2 2.2L15.5 10"/>`,
+  factory: `<path d="M3.5 20.5v-9l5 3v-3l5 3V7.5l7 3.5v9.5z"/><path d="M8 16.5h2"/><path d="M14 16.5h2"/>`,
+  sun: `<circle cx="12" cy="12" r="4"/><path d="M12 3v2"/><path d="M12 19v2"/><path d="M3 12h2"/><path d="M19 12h2"/><path d="m5.6 5.6 1.4 1.4"/><path d="m17 17 1.4 1.4"/><path d="m18.4 5.6-1.4 1.4"/><path d="m7 17-1.4 1.4"/>`,
+  handshake: `<path d="m3.5 12.5 4-4 3 2.5 2-1.5 4 3"/><path d="m8 16.5 3 2.5 3-2 3.5 2 2.5-4.5-4-6"/><path d="m3.5 12.5 3 5"/>`,
+  "arrow-right": `<path d="M4.5 12h15"/><path d="m13.5 6 6 6-6 6"/>`,
+  "arrow-down": `<path d="M12 4.5v15"/><path d="m6 13.5 6 6 6-6"/>`,
+  chevron: `<path d="m6 9.5 6 6 6-6"/>`,
+  check: `<path d="m5 12.5 4.5 4.5L19 7"/>`,
+  phone: `<path d="M8 3.5H5.5A2 2 0 0 0 3.5 6c0 7.7 6.8 14.5 14.5 14.5a2 2 0 0 0 2.5-2v-2.4l-4.5-1.6-2 2a15.6 15.6 0 0 1-5.5-5.5l2-2z"/>`,
+  mail: `<path d="M3.5 6.5h17v11h-17z"/><path d="m3.5 7 8.5 6 8.5-6"/>`,
+  pin: `<path d="M12 21c4-4.4 6.5-7.4 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 13.6 8 16.6 12 21Z"/><circle cx="12" cy="10.5" r="2.4"/>`,
+  clock: `<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.5 2"/>`,
+  menu: `<path d="M3.5 7h17"/><path d="M3.5 12h17"/><path d="M3.5 17h17"/>`,
+  close: `<path d="m5.5 5.5 13 13"/><path d="m18.5 5.5-13 13"/>`,
+  search: `<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>`,
+  globe: `<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.5 2.4 3.8 5.3 3.8 8.5S14.5 18.6 12 20.5c-2.5-1.9-3.8-4.8-3.8-8S9.5 5.9 12 3.5Z"/>`,
+};
+---
+
+<svg
+  class={className}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width={strokeWidth}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+  set:html={paths[name]}
+/>

@@ -1,0 +1,39 @@
+---
+import { stats } from "../data/site";
+---
+
+<section aria-label="Bi Group at a glance" class="relative isolate overflow-hidden bg-navy-800 text-white">
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(90%_140%_at_80%_0%,#22409f_0%,#0b1c4d_60%,#071335_100%)]"></div>
+  <div class="grain -z-10"></div>
+
+  <div class="container-page py-16 lg:py-20">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <h2 class="eyebrow text-signal-500" data-reveal>Bi Group at a glance</h2>
+      <p class="max-w-md text-sm text-white/55" data-reveal style="--reveal-delay:80ms">
+        Scale that stays close to the customer — group capability with the responsiveness of a
+        single business unit.
+      </p>
+    </div>
+
+    <dl class="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        stats.map((stat, index) => (
+          <div
+            class="group relative border-t border-white/15 pt-6"
+            data-reveal
+            style={`--reveal-delay:${index * 90}ms`}
+          >
+            <span
+              class="absolute -top-px left-0 h-px w-0 bg-signal-500 transition-[width] duration-700 ease-[var(--ease-brand)] group-hover:w-full"
+            />
+            <dd class="font-display text-[clamp(2.75rem,5vw,3.75rem)] leading-none font-extrabold tracking-tight">
+              <span data-count-to={stat.value}>0</span>{stat.suffix}
+            </dd>
+            <dt class="mt-4 font-display text-base font-bold text-signal-500">{stat.label}</dt>
+            <p class="mt-1.5 text-sm leading-relaxed text-white/60">{stat.detail}</p>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>

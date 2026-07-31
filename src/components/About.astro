@@ -1,0 +1,119 @@
+---
+import Icon from "./Icon.astro";
+
+const capabilities = [
+  {
+    title: "We manufacture",
+    text: "Paints and coatings, engineered components, electronics and consumer goods made in our own facilities with batch-level control.",
+    icon: "factory",
+  },
+  {
+    title: "We apply",
+    text: "Trained crews take on surface preparation, application and inspection so the specified system performs as written.",
+    icon: "roller",
+  },
+  {
+    title: "We deliver",
+    text: "Dealer, project and e-commerce channels put the group's range within reach across the country.",
+    icon: "ecommerce",
+  },
+] as const;
+---
+
+<section id="about" class="relative overflow-hidden bg-white py-24 lg:py-32">
+  <div
+    class="pointer-events-none absolute -top-24 -right-32 size-[26rem] rounded-full bg-mist blur-[80px]"
+  >
+  </div>
+
+  <div class="container-page relative grid gap-16 lg:grid-cols-[1fr_0.95fr] lg:gap-20">
+    <div>
+      <p class="eyebrow text-signal-600" data-reveal>About Bi Group</p>
+      <h2
+        class="mt-5 text-[clamp(2rem,4.2vw,3.25rem)] leading-[1.05] font-extrabold text-navy-800"
+        data-reveal
+        style="--reveal-delay:60ms"
+      >
+        A group built the way a coating is specified — layer by layer.
+      </h2>
+
+      <div class="mt-7 max-w-xl space-y-5 text-base leading-relaxed text-navy-900/70 lg:text-lg">
+        <p data-reveal style="--reveal-delay:120ms">
+          Bi Group began with paint and grew into ten connected businesses. Each one was added
+          because customers asked us to solve the next problem: protect the steel, then coat the
+          coil, then fit out the building, then keep it cool, then get the product to the door.
+        </p>
+        <p data-reveal style="--reveal-delay:180ms">
+          The common thread is a manufacturing mindset — controlled formulation, documented
+          specification and people who answer for the result long after handover. It is the reason
+          steel majors, EPC contractors and the Ministry of Defence keep us on their approved lists,
+          and the reason a family choosing an interior shade gets the same rigour.
+        </p>
+      </div>
+
+      <dl class="mt-10 grid max-w-xl gap-6 sm:grid-cols-2" data-reveal style="--reveal-delay:240ms">
+        <div class="border-l-2 border-signal-500 pl-4">
+          <dt class="font-display text-sm font-bold text-navy-800">Industrial rigour</dt>
+          <dd class="mt-1 text-sm text-navy-900/65">
+            Inspection regimes set by our toughest customers become the group baseline.
+          </dd>
+        </div>
+        <div class="border-l-2 border-navy-200 pl-4">
+          <dt class="font-display text-sm font-bold text-navy-800">Consumer clarity</dt>
+          <dd class="mt-1 text-sm text-navy-900/65">
+            Honest pricing, plain specifications and service that stays reachable.
+          </dd>
+        </div>
+      </dl>
+
+      <a
+        href="/about"
+        class="link-sweep mt-10 inline-flex items-center gap-2 font-display text-sm font-bold text-navy-600"
+        data-reveal
+        style="--reveal-delay:300ms"
+      >
+        More about the group
+        <Icon name="arrow-right" class="size-4" strokeWidth={2} />
+      </a>
+    </div>
+
+    <div class="space-y-4">
+      {
+        capabilities.map((item, index) => (
+          <article
+            class="group relative overflow-hidden rounded-2xl border border-navy-100 bg-white p-6 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-navy-200 hover:shadow-lift"
+            data-reveal="right"
+            style={`--reveal-delay:${index * 100}ms`}
+          >
+            <span
+              class="absolute inset-y-0 left-0 w-1 origin-top scale-y-0 bg-signal-500 transition-transform duration-500 group-hover:scale-y-100"
+            />
+            <div class="flex items-start gap-4">
+              <span class="flex size-11 shrink-0 items-center justify-center rounded-xl bg-navy-50 text-navy-600">
+                <Icon name={item.icon as any} class="size-6" strokeWidth={1.7} />
+              </span>
+              <div>
+                <h3 class="font-display text-lg font-bold text-navy-800">{item.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-navy-900/65">{item.text}</p>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+
+      <blockquote
+        class="relative overflow-hidden rounded-2xl bg-navy-800 p-7 text-white"
+        data-reveal="right"
+        style="--reveal-delay:320ms"
+      >
+        <div class="grain"></div>
+        <p class="relative font-display text-lg leading-snug font-semibold">
+          “Ten businesses only make sense if every one of them can be held to the same promise.”
+        </p>
+        <footer class="relative mt-4 text-xs font-semibold tracking-[0.18em] text-signal-500 uppercase">
+          The Bi Group commitment
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</section>

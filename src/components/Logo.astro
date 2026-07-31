@@ -1,0 +1,106 @@
+---
+/**
+ * Bi Group wordmark rebuilt in CSS: heavy oblique lettering with the "i" set in
+ * a solid block and a signal-yellow tittle. Scales with `font-size`, so a single
+ * `class` such as `text-2xl` controls the whole mark.
+ */
+interface Props {
+  variant?: "navy" | "light";
+  class?: string;
+  /** Renders the registered-trademark mark next to the wordmark. */
+  registered?: boolean;
+}
+
+const { variant = "navy", class: className = "text-2xl", registered = true } = Astro.props;
+const isLight = variant === "light";
+---
+
+<span
+  class:list={[
+    "logo font-display inline-flex items-start leading-none select-none",
+    isLight ? "text-white" : "text-navy-600",
+    className,
+  ]}
+  data-variant={variant}
+>
+  <span class="logo__lettering">
+    <span class="logo__b">B</span>
+    <span class="logo__block" aria-hidden="true">
+      <span class="logo__dot"></span>
+      <span class="logo__stem"></span>
+    </span>
+    <span class="logo__group">GROUP</span>
+  </span>
+  {registered && <span class="logo__reg" aria-hidden="true">®</span>}
+  <span class="sr-only">Bi Group</span>
+</span>
+
+<style>
+  .logo {
+    --logo-slant: -11deg;
+  }
+
+  .logo__lettering {
+    display: inline-flex;
+    align-items: stretch;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    transform: skewX(var(--logo-slant));
+  }
+
+  .logo__b,
+  .logo__group {
+    display: block;
+    line-height: 0.92;
+  }
+
+  .logo__b {
+    margin-right: 0.02em;
+  }
+
+  .logo__group {
+    margin-left: 0.08em;
+  }
+
+  /* The "i" block: solid slab, white stem, yellow tittle. */
+  .logo__block {
+    position: relative;
+    display: block;
+    width: 0.4em;
+    align-self: stretch;
+    background: currentColor;
+    margin-block: -0.02em;
+  }
+
+  .logo__stem,
+  .logo__dot {
+    position: absolute;
+    left: 50%;
+    width: 0.13em;
+    transform: translateX(-50%);
+    background: white;
+  }
+
+  .logo__stem {
+    bottom: 0.1em;
+    top: 0.32em;
+  }
+
+  .logo__dot {
+    top: 0.08em;
+    height: 0.16em;
+    background: var(--color-signal-500);
+  }
+
+  .logo[data-variant="light"] .logo__stem {
+    background: var(--color-navy-700);
+  }
+
+  .logo__reg {
+    font-size: 0.3em;
+    font-weight: 700;
+    line-height: 1;
+    margin-top: 0.15em;
+    margin-left: 0.14em;
+  }
+</style>

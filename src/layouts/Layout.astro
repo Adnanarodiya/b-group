@@ -1,0 +1,118 @@
+---
+import "@fontsource-variable/archivo/wght.css";
+import "@fontsource-variable/inter/wght.css";
+import "../styles/global.css";
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${site.name} — ${site.tagline}`,
+  description = site.description,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, site.url).href;
+
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.legalName,
+  alternateName: site.name,
+  url: site.url,
+  description: site.description,
+  slogan: site.tagline,
+  email: site.contact.email,
+  telephone: site.contact.phone,
+  address: { "@type": "PostalAddress", addressCountry: "IN", streetAddress: site.contact.address },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#16307f" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organization)} is:inline />
+  </head>
+  <body class="overflow-x-hidden">
+    <a
+      href="#main"
+      class="btn btn-navy sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-100"
+    >
+      Skip to content
+    </a>
+    <slot />
+
+    <script>
+      // Scroll-in reveals, animated counters and marquee pausing all share one
+      // observer setup so the page ships a single tiny script.
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const revealTargets = document.querySelectorAll<HTMLElement>("[data-reveal]");
+      if (reduceMotion) {
+        revealTargets.forEach((el) => el.classList.add("is-revealed"));
+      } else {
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-revealed");
+              revealObserver.unobserve(entry.target);
+            });
+          },
+          { rootMargin: "0px 0px -12% 0px", threshold: 0.1 },
+        );
+        revealTargets.forEach((el) => revealObserver.observe(el));
+      }
+
+      const counters = document.querySelectorAll<HTMLElement>("[data-count-to]");
+      const runCounter = (el: HTMLElement) => {
+        const target = Number(el.dataset.countTo ?? "0");
+        if (reduceMotion) {
+          el.textContent = target.toLocaleString("en-IN");
+          return;
+        }
+        const duration = 1600;
+        const start = performance.now();
+        const tick = (now: number) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * eased).toLocaleString("en-IN");
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+
+      const counterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            runCounter(entry.target as HTMLElement);
+            counterObserver.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.4 },
+      );
+      counters.forEach((el) => counterObserver.observe(el));
+    </script>
+  </body>
+</html>
