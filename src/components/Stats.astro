@@ -1,0 +1,36 @@
+---
+const stats = [
+  { value: "25+", label: "Years of Excellence" },
+  { value: "10+", label: "Business Verticals" },
+  { value: "500+", label: "Products & Solutions" },
+  { value: "11+", label: "Enterprise Clients" },
+  { value: "Pan-India", label: "Distribution Network" },
+];
+---
+
+<section class="py-16 bg-bi-navy relative overflow-hidden">
+  <!-- Decorative background -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-bi-gold rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-bi-gold rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 reveal">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
+        Bi Group <span class="text-bi-gold italic">At a Glance</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      {
+        stats.map((stat, i) => (
+          <div class="reveal text-center" style={`transition-delay: ${i * 100}ms`}>
+            <p class="text-3xl sm:text-4xl font-extrabold text-bi-gold mb-2">{stat.value}</p>
+            <p class="text-sm text-white/70 font-medium uppercase tracking-wider">{stat.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

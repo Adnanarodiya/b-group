@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bi-navy: #0c1f3d;
+  --color-bi-navy-light: #152a4f;
+  --color-bi-navy-dark: #071428;
+  --color-bi-gold: #f5b800;
+  --color-bi-gold-light: #ffd54f;
+  --color-bi-gold-dark: #d4a000;
+  --color-bi-gray: #f5f7fa;
+  --color-bi-gray-dark: #e2e8f0;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-bi-navy);
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Animated underline for nav links */
+.nav-link {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-bi-gold);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Stagger delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Stats counter animation */
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Marquee for client logos */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Hero gradient overlay */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(12, 31, 61, 0.92) 0%,
+    rgba(12, 31, 61, 0.75) 50%,
+    rgba(12, 31, 61, 0.6) 100%
+  );
+}
+
+/* Card hover effect */
+.vertical-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vertical-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(12, 31, 61, 0.12);
+}
+
+/* Gold accent line */
+.gold-accent::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--color-bi-gold);
+  margin-bottom: 1.5rem;
+}
+
+/* Mobile menu transition */
+.mobile-menu {
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

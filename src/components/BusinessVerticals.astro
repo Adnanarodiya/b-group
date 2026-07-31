@@ -1,0 +1,94 @@
+---
+const verticals = [
+  {
+    name: "Bi Paints & Color Coating",
+    description: "Premium decorative and industrial paints, coatings, and surface solutions for every application.",
+    icon: "🎨",
+    featured: true,
+  },
+  {
+    name: "Bi Modular Kitchen",
+    description: "Contemporary modular kitchen designs with premium finishes and smart storage solutions.",
+    icon: "🏠",
+  },
+  {
+    name: "Bi Agriculture",
+    description: "Sustainable agricultural products and solutions empowering farmers across India.",
+    icon: "🌾",
+  },
+  {
+    name: "Bi Homeopathy",
+    description: "Natural homeopathic remedies crafted with care for holistic health and wellness.",
+    icon: "💊",
+  },
+  {
+    name: "Bi Clothes",
+    description: "Quality apparel and textiles combining comfort, style, and durability.",
+    icon: "👔",
+  },
+  {
+    name: "Bi Electronics",
+    description: "Consumer electronics and smart devices designed for modern living.",
+    icon: "📱",
+  },
+  {
+    name: "Bi Air Conditioner",
+    description: "Energy-efficient air conditioning systems for residential and commercial spaces.",
+    icon: "❄️",
+  },
+  {
+    name: "Bi Painting Solutions",
+    description: "End-to-end painting services and professional application solutions.",
+    icon: "🖌️",
+  },
+  {
+    name: "Bi Engineering",
+    description: "Engineering services and industrial solutions for complex project requirements.",
+    icon: "⚙️",
+  },
+  {
+    name: "Bi E-commerce",
+    description: "Digital marketplace bringing all Bi Group products to your doorstep.",
+    icon: "🛒",
+  },
+];
+---
+
+<section id="businesses" class="py-24 lg:py-32 bg-bi-gray">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <div class="gold-accent mx-auto">
+        <span class="text-bi-gold font-semibold text-sm uppercase tracking-widest">Our Portfolio</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-bi-navy mb-4">
+        Business <span class="italic">Verticals</span>
+      </h2>
+      <p class="text-lg text-bi-navy/60 max-w-2xl mx-auto">
+        A diversified portfolio spanning industries — each vertical driven by innovation, quality, and a commitment to excellence.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+      {
+        verticals.map((vertical, i) => (
+          <div
+            class:list={[
+              "vertical-card reveal bg-white rounded-sm p-6 border border-bi-gray-dark",
+              vertical.featured && "ring-2 ring-bi-gold/50 relative",
+            ]}
+            style={`transition-delay: ${i * 50}ms`}
+          >
+            {vertical.featured && (
+              <span class="absolute -top-3 left-4 px-3 py-0.5 bg-bi-gold text-bi-navy text-xs font-bold uppercase tracking-wider rounded-sm">
+                Flagship
+              </span>
+            )}
+            <div class="text-3xl mb-4">{vertical.icon}</div>
+            <h3 class="text-base font-bold text-bi-navy mb-2 leading-snug">{vertical.name}</h3>
+            <p class="text-sm text-bi-navy/60 leading-relaxed">{vertical.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

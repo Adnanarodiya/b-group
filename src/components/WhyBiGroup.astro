@@ -1,0 +1,67 @@
+---
+const reasons = [
+  {
+    title: "Quality First",
+    description: "Every product undergoes rigorous testing and quality assurance to meet international standards.",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`,
+  },
+  {
+    title: "Innovation Driven",
+    description: "Continuous R&D investment ensures we stay ahead with cutting-edge products and sustainable solutions.",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>`,
+  },
+  {
+    title: "Pan-India Reach",
+    description: "Extensive distribution network ensuring our products and services reach every corner of the nation.",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+  },
+  {
+    title: "Sustainability",
+    description: "Committed to eco-friendly practices, low-VOC formulations, and responsible manufacturing processes.",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>`,
+  },
+  {
+    title: "Customer Centric",
+    description: "Dedicated support teams and tailored solutions to meet the unique needs of every client.",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`,
+  },
+  {
+    title: "Diversified Strength",
+    description: "Ten business verticals under one umbrella, offering comprehensive solutions for diverse industries.",
+    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`,
+  },
+];
+---
+
+<section id="sustainability" class="py-24 lg:py-32 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <div class="gold-accent mx-auto">
+        <span class="text-bi-gold font-semibold text-sm uppercase tracking-widest">Our Advantage</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-bi-navy mb-4">
+        Why <span class="italic text-bi-gold">Bi Group</span>
+      </h2>
+      <p class="text-lg text-bi-navy/60 max-w-2xl mx-auto">
+        Decades of trust, innovation, and unwavering commitment to excellence — here's what sets us apart.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        reasons.map((reason, i) => (
+          <div
+            class="reveal group p-8 rounded-sm border border-bi-gray-dark hover:border-bi-gold/40 hover:shadow-lg transition-all duration-300"
+            style={`transition-delay: ${i * 80}ms`}
+          >
+            <div class="w-14 h-14 bg-bi-navy/5 group-hover:bg-bi-gold/20 rounded-sm flex items-center justify-center text-bi-navy group-hover:text-bi-gold transition-colors duration-300 mb-6">
+              <Fragment set:html={reason.icon} />
+            </div>
+            <h3 class="text-xl font-bold text-bi-navy mb-3">{reason.title}</h3>
+            <p class="text-bi-navy/60 leading-relaxed">{reason.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
